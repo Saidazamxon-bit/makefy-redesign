@@ -1,0 +1,147 @@
+/* Testimonials marquee carousel styles */
+.testimonials-mask {
+  overflow: hidden;
+  position: relative;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+}
+
+.testimonials-track {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  width: max-content;
+  will-change: transform;
+  /* duration set via --marquee-duration */
+  animation: testimonials-marquee var(--marquee-duration, 30s) linear infinite;
+}
+
+.testimonial-sequence {
+  display: flex;
+  gap: 18px;
+}
+
+.testimonial-item {
+  flex: 0 0 auto;
+}
+
+/* Complete visual redesign for testimonial cards: modern premium glass from scratch */
+.testimonial-card {
+  --card-bg: rgba(8,12,18,0.56);
+  --card-border: rgba(255,255,255,0.06);
+  --card-accent: rgba(124,58,237,0.12);
+  position: relative;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.006)), var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  padding: 22px 24px;
+  min-height: 220px;
+  width: 360px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #eef3f8;
+  overflow: hidden;
+  -webkit-backdrop-filter: blur(8px) saturate(120%);
+  backdrop-filter: blur(8px) saturate(120%);
+  box-shadow: 0 10px 30px rgba(2,6,23,0.55);
+  transition: transform .28s cubic-bezier(.2,.9,.2,1), box-shadow .28s ease, opacity .28s ease;
+}
+
+/* top-left soft shine for subtle glass feel */
+.testimonial-card::before{
+  content: '';
+  position: absolute;
+  left: -40%; top: -30%;
+  width: 120%; height: 80%;
+  background: radial-gradient(600px 120px at 20% 20%, rgba(255,255,255,0.03), transparent 25%);
+  pointer-events: none;
+}
+
+.testimonial-header{ display:flex; align-items:center; gap:14px }
+.testimonial-avatar{
+  width:48px; height:48px; flex:0 0 48px; display:grid; place-items:center; border-radius:12px; color:#fff; font-weight:700; font-size:15px;
+  background: linear-gradient(135deg, rgba(99,102,241,0.95), rgba(139,92,246,0.95));
+  box-shadow: 0 8px 20px rgba(99,102,241,0.12), inset 0 1px 0 rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.03);
+}
+.testimonial-meta{min-width:0}
+.testimonial-name{font-size:15px; font-weight:700; line-height:1; color: #fff; margin:0}
+.testimonial-username{font-size:12px; color: rgba(255,255,255,0.62); margin-top:4px}
+
+.testimonial-rating{margin-top:10px; display:flex; align-items:center; gap:8px; color: var(--accent, #f6c85a)}
+.testimonial-rating .stars{display:inline-flex; gap:6px; align-items:center}
+.testimonial-rating svg{ color: #f6c85a; opacity:0.98; filter: drop-shadow(0 1px 0 rgba(0,0,0,0.25)); }
+.rating-value{font-size:12px; color: rgba(255,255,255,0.74); margin-left:4px}
+
+.testimonial-content{ margin-top:12px; flex: 1 1 auto }
+.testimonial-content p{ margin:0; font-size:15px; color: rgba(255,255,255,0.9); line-height:1.6 }
+
+.testimonial-footer{ display:flex; align-items:center; justify-content:space-between; gap:8px; margin-top:14px; padding-top:12px; }
+.testimonial-footer::before{ content:''; position:absolute; left:24px; right:24px; top:calc(100% - 56px); height:1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.02), transparent); pointer-events:none }
+.testimonial-role{ font-size:12px; color: rgba(255,255,255,0.6); text-transform:uppercase; letter-spacing:0.08em }
+.testimonial-badge{ display:inline-flex; align-items:center; gap:6px; padding:6px 8px; border-radius:999px; background: rgba(255,255,255,0.02); color: rgba(255,255,255,0.85); font-size:12px }
+.testimonial-badge svg{ color: rgba(110,231,183,0.95) }
+
+/* Subtle micro-interaction without pausing carousel */
+.testimonial-item:hover .testimonial-card{ transform: translateY(-6px) scale(1.005); box-shadow: 0 18px 48px rgba(2,6,23,0.6); }
+
+/* Responsive sizing */
+@media (min-width: 1400px){ .testimonial-card{ width: 400px; } }
+@media (max-width: 1024px){ .testimonial-card{ width: 360px; } }
+@media (max-width: 640px){ .testimonial-card{ width: calc(100vw - 40px); min-height: 200px; padding:18px } }
+
+/* Center focus styling applied by IntersectionObserver */
+.testimonial-card.is-center{
+  transform: scale(1.035) translateY(-4px);
+  box-shadow: 0 24px 60px rgba(2,6,23,0.7);
+  border-color: rgba(255,255,255,0.085);
+  /* subtle glow using pseudo-element */
+}
+
+.testimonial-card.is-center::after{
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow: 0 8px 28px rgba(99,102,241,0.06);
+}
+
+
+@keyframes testimonials-marquee {
+  from { transform: translate3d(0,0,0); }
+  to { transform: translate3d(-50%,0,0); }
+}
+
+/* Previously paused on hover; intentionally removed so carousel never stops. */
+
+/* Subtle section glow */
+.testimonials-glow::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(60% 50% at 50% 10%, rgba(120,80,200,0.04), transparent 30%);
+  mix-blend-mode: screen;
+}
+
+/* Reduced motion: disable auto animation and allow manual scroll */
+@media (prefers-reduced-motion: reduce) {
+  .testimonials-mask { overflow: auto; -webkit-overflow-scrolling: touch; }
+  .testimonials-track { animation: none; }
+}
+
+/* Responsive card sizing: keep consistent widths */
+.testimonial-item .group {
+  width: 320px; /* consistent width */
+  min-height: 150px;
+}
+
+@media (min-width: 1280px) {
+  .testimonial-item .group { width: 360px; }
+}
+
+@media (max-width: 640px) {
+  .testimonial-item .group { width: 300px; }
+}

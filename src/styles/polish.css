@@ -1,0 +1,124 @@
+/* 7-bosqich: dizayn sayqali (faqat qo'shimcha qatlam — mantiqqa tegmaydi).
+   Maqsad: yirik mahsulotlardagidek izchil ritm, chuqurlik, mikro-interaksiya va o'qilishi.
+   Hamma rang tokenlardan olinadi → kun/tun/Telegram rejimlarida o'zi moslashadi. */
+
+/* Raqamlar (balans, statistika) tekis chiqsin */
+.mf-metric-card strong,.mf-bots-summary-card strong,.mf-detail-stat strong,.mf-profile-balance strong,
+.mf-balance-pill,.mf-leader-row strong{font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
+
+/* Sarlavhalar: aniqroq ierarxiya */
+.mf-page h1{letter-spacing:-.05em;text-wrap:balance}
+.mf-page p,.mf-panel p{text-wrap:pretty}
+.mf-kicker{color:var(--accent-ink,var(--accent-dim))}
+
+/* Kartalar: yagona chuqurlik tizimi (hover'da ko'tarilish + yumshoq chegara) */
+.mf-panel,.mf-metric-card,.mf-bot-card,.mf-detail-card,.mf-profile-card,.mf-settings-card,
+.mf-bots-summary-card,.mf-detail-stat,.mf-action-card,.mf-detail-action{
+  transition:transform .2s cubic-bezier(.2,.7,.2,1),box-shadow .2s ease,border-color .2s ease,background-color .2s ease}
+.mf-metric-card:hover,.mf-bots-summary-card:hover,.mf-detail-stat:hover{border-color:var(--border-light);box-shadow:var(--shadow-card)}
+.mf-panel{box-shadow:0 1px 2px rgba(16,32,24,.04),0 8px 24px rgba(16,32,24,.04)}
+html[data-theme="dark"] .mf-panel{box-shadow:0 1px 0 rgba(255,255,255,.03) inset,0 10px 28px rgba(0,0,0,.22)}
+
+/* Asosiy tugma: bosilganda sezilarli, fokusda aniq */
+.mf-button,.mf-button-primary{user-select:none}
+.mf-button:active,.mf-button-primary:active{transform:translateY(0) scale(.98);transition-duration:.06s}
+.mf-button--primary{background-image:linear-gradient(180deg,rgba(255,255,255,.18),transparent 60%)}
+.mf-button--primary,.mf-button-primary{color:var(--accent-text)}
+.mf-button[disabled],.mf-button[aria-disabled="true"]{opacity:.55;pointer-events:none;box-shadow:none}
+
+/* Hero kartalar: chuqurroq gradient + nozik doira naqsh */
+.mf-hero-card,.mf-detail-hero,.mf-profile-hero{background-image:radial-gradient(120% 140% at 0% 0%,rgba(255,255,255,.07),transparent 55%)}
+.mf-hero-card::before{content:"";position:absolute;inset:0;background:repeating-radial-gradient(circle at 100% 100%,rgba(255,255,255,.045) 0 1px,transparent 1px 22px);pointer-events:none}
+
+/* Yon panel: faol element va hover aniqroq */
+.mf-sidebar__item{position:relative}
+.mf-sidebar__item.is-active{font-weight:700}
+.mf-sidebar{box-shadow:1px 0 0 var(--border)}
+
+/* Topbar: sahifa aylanganda sezilarli shisha effekt */
+.mf-topbar{backdrop-filter:saturate(1.4) blur(16px);-webkit-backdrop-filter:saturate(1.4) blur(16px)}
+
+/* Bot kartasi / ro'yxat qatorlari: bosish maydoni va fokus */
+.mf-dashboard-bot,.mf-focus-item,.mf-settings-link,.mf-profile-item{transition:background-color .15s ease,transform .15s ease}
+.mf-dashboard-bot:active,.mf-focus-item:active{transform:scale(.995)}
+
+/* Skeleton: tema tokenlari bilan (tunda oq yarq etmasin) */
+.mf-skeleton>div,.mf-detail-skeleton>div{background:linear-gradient(90deg,var(--surface-2),var(--surface-3),var(--surface-2));background-size:200% 100%}
+
+/* Bo'sh holat: nozik ramka va markazlash */
+.mf-empty-state{background:linear-gradient(180deg,var(--surface),var(--surface-2))}
+
+/* Toast va Modal: chuqurlik va blur */
+[role="dialog"]{box-shadow:0 24px 70px rgba(0,0,0,.35)}
+[role="status"].shadow-lg{backdrop-filter:blur(10px)}
+
+/* Skrollbar: ingichka va tema rangida */
+*{scrollbar-width:thin;scrollbar-color:var(--surface-4) transparent}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-thumb{background:var(--surface-4);border-radius:999px;border:3px solid transparent;background-clip:content-box}
+::-webkit-scrollbar-thumb:hover{background:var(--border-light);background-clip:content-box;border:3px solid transparent}
+
+/* Mobil: tegish maydoni kamida 44px, pastki navigatsiya xavfsiz zona */
+@media (max-width:760px){
+  .mf-icon-button,.mf-global-theme-toggle{width:44px;height:44px}
+  .mf-filter-pill{min-height:36px}
+  .mf-nav-item{min-height:52px}
+  .mf-page h1{letter-spacing:-.04em}
+}
+
+/* Chop etish: faqat mazmun */
+@media print{.mf-sidebar,.mf-topbar,.mf-bottom-nav,.makefy-footer{display:none!important}.app-shell{display:block}.app-main{width:100%;padding:0}}
+
+/* ===== Telegram Mini App (iPhone) skrinshotlaridan topilgan nuqsonlar ===== */
+
+/* Ro'yxatlar: preflight ulanmagani uchun class berilgan ul/ol da nuqta/raqam va 40px chekinish chiqib qolardi
+   (qidiruv oynasi, onboarding qadamlari). @layer base → Tailwind utilitalari (list-disc, pl-5) baribir ustun. */
+@layer base{ ul[class],ol[class]{list-style:none;margin:0;padding:0} }
+
+/* Yuqori panel: balans bir qatorda, avatar ekran chetidan chiqmasin */
+.mf-balance-pill{white-space:nowrap;flex:0 0 auto}
+.mf-profile{flex:0 0 auto}
+.mf-topbar__right{min-width:0}
+@media (max-width:520px){
+  .mf-topbar__inner{gap:8px}
+  .mf-topbar__brand .mf-brand__wordmark{display:none}   /* faqat belgi: joy tejaladi */
+  .mf-topbar__right{gap:2px}
+  .mf-balance-pill{padding:0 9px;gap:6px;font-size:12px}
+  .mf-balance-pill__plus{display:none}
+  .mf-profile__button{width:36px;height:36px;margin-left:4px}
+}
+@media (max-width:360px){ .mf-balance-pill__icon{display:none} }
+
+/* Bildirishnoma paneli: telefonda chap chetdan chiqib ketmasin */
+@media (max-width:760px){
+  .mf-notif-panel{position:fixed;left:12px;right:12px;top:72px;width:auto;max-height:calc(100vh - 150px);overflow:auto}
+}
+
+/* Pastki navigatsiya: orqasidan kartalar ko'rinmasin (shaffof Telegram ranglarida ham) */
+.mf-bottom-nav,
+html[data-theme-preference="system"] .mf-bottom-nav,
+html[data-theme="dark"] .mf-bottom-nav{
+  background:linear-gradient(var(--surface),var(--surface)),var(--bg);
+  backdrop-filter:none;-webkit-backdrop-filter:none;
+  box-shadow:0 -10px 24px color-mix(in srgb,var(--bg) 92%,transparent),0 10px 30px rgba(16,32,24,.14)}
+.mf-nav-create{gap:1px;transform:translateY(-7px)}
+.mf-nav-create small{font-size:9px;font-weight:700}
+
+/* Hero karta: Telegram/tun rejimida fon ochiq bo'lsa ham matn o'qilsin */
+html[data-theme-preference="system"] .mf-hero-card h2,
+html[data-theme="dark"] .mf-hero-card h2{color:var(--text)}
+html[data-theme-preference="system"] .mf-hero-card p,
+html[data-theme="dark"] .mf-hero-card p{color:var(--text-muted)}
+
+/* Faol filtr: eski to'q-sariq chegara o'rniga brend rangi */
+.mf-filter-pill.is-active{border-color:var(--accent);color:var(--accent-ink,var(--accent-dim))}
+.mf-filter-pill{min-height:34px}
+
+/* Logo atrofidagi oq kvadrat/soya artefakti */
+.mf-topbar .mf-brand__image{box-shadow:none}
+
+/* Sarlavhalar: Tailwind margin utilitalari endi ishlaydi (palette sarlavhasi input ostida qolmasin) */
+[role="dialog"] h2{margin-bottom:12px}
+
+/* Preflight yo'q: <button> brauzer standart kulrang foni va ramkasi bilan chiqardi (qidiruv/qo'ng'iroq doiralari) */
+@layer base{button{background:transparent;border:0;padding:0;color:inherit;font:inherit;cursor:pointer}}

@@ -1,0 +1,14 @@
+/* Performance overrides: reduce expensive blur for key UI chrome */
+.mf-sidebar, .mf-topbar, .mf-bottom-nav {
+  -webkit-backdrop-filter: blur(8px) !important;
+  backdrop-filter: blur(8px) !important;
+}
+
+/* Lower blur for specific heavy effects used on the login page */
+.makefy-orb { filter: blur(8px); }
+
+/* Other heavy modal / nav blurs used in a few pages */
+.tgwa-nav, .makefy-float-card, .makefy-modal-backdrop {
+  -webkit-backdrop-filter: blur(8px) !important;
+  backdrop-filter: blur(8px) !important;
+}

@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/VisionBuilder/bots/:path*",
+      "destination": "/api/bot/:path*"
+    },
+    {
+      "source": "/((?!assets/|api/|VisionBuilder/).*)",
+      "destination": "/index.html"
+    }
+  ]
+}

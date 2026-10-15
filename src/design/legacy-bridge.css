@@ -1,0 +1,66 @@
+/* Hali ko'chirilmagan sahifalar uchun ko'prik: eski sinflarni yangi tokenlarga bog'laydi. Barcha sahifalar ko'chgach O'CHIRILADI. */
+/* ---------- 3. ESKI SINF OILALARINI BIR XILLASHTIRISH ---------- */
+/* 3a. Qutilar: bir xil fon, ingichka chegara, yumshoq soya, 16px radius */
+html:root .pf-card, html:root .ai-card, html:root .mf-profile-card, html:root .mf-settings-card,
+html:root .mf-settings-section, html:root .mf-bot-card, html:root .mf-tpl-card, html:root .mf-cred-card,
+html:root .mf-panel, html:root .mf-error-card, html:root .mf-metric-card, html:root .mf-bots-summary-card,
+html:root .mf-create-hero, html:root .pf-hero, html:root .mf-profile-hero, html:root .hm-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--mf-shadow);
+  backdrop-filter: none;
+}
+html:root .mf-bot-card:hover, html:root .mf-tpl-card:hover, html:root .pf-card:hover, html:root .mf-metric-card:hover {
+  box-shadow: var(--mf-shadow-hover);
+  border-color: var(--border-light);
+  transform: none;
+}
+html:root .mf-bot-card, html:root .mf-tpl-card, html:root .mf-metric-card { transition: box-shadow .2s var(--mf-ease), border-color .2s var(--mf-ease); }
+
+/* 3b. Tugmalar */
+html:root .mf-button {
+  min-height: 40px; padding: 0 16px; border-radius: var(--radius-md);
+  font-weight: 600; font-size: 14px; letter-spacing: -.005em; box-shadow: none;
+  transition: background .18s var(--mf-ease), border-color .18s var(--mf-ease), color .18s;
+}
+html:root .mf-button--primary, html:root .mf-button.is-primary {
+  background: var(--mf-brand); color: var(--mf-on-brand); border-color: transparent; background-image: none;
+}
+html:root .mf-button--primary:hover, html:root .mf-button.is-primary:hover { background: var(--mf-brand-hover); transform: none; }
+html:root .mf-button--ghost { background: transparent; border-color: var(--border-light); color: var(--text); }
+html:root .mf-button--ghost:hover { background: var(--surface-2); transform: none; }
+
+/* 3c. Maydonlar */
+html:root input:not([type="checkbox"]):not([type="radio"]):not([type="range"]), html:root textarea, html:root select {
+  border-radius: var(--radius-md);
+  transition: border-color .18s var(--mf-ease), box-shadow .18s var(--mf-ease);
+}
+html:root input:focus, html:root textarea:focus, html:root select:focus {
+  border-color: var(--mf-brand) !important;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--mf-brand) 18%, transparent);
+  outline: none;
+}
+
+/* 3d. Sarlavhalar va sahifa boshi: hamma bo'limda bir xil */
+html:root .mf-page h1, html:root .mf-settings-head h1, html:root .mf-bots-head h1, html:root .mf-profile-head h1,
+html:root .mf-detail-head h1, html:root .mf-create-hero h1, html:root .mf-h1 {
+  font-size: clamp(22px, 2.6vw, 27px); font-weight: 700; letter-spacing: -.03em; line-height: 1.2; margin: 0;
+}
+html:root .mf-h1 { margin: 0; }
+html:root .mf-page header p, html:root .mf-settings-head p, html:root .mf-bots-head p, html:root .mf-profile-head p {
+  color: var(--text-muted); font-size: 14px; line-height: 1.55; margin-top: 4px;
+}
+html:root .mf-kicker { font-size: 11px; font-weight: 650; letter-spacing: .08em; color: var(--text-dim); text-transform: uppercase; }
+html:root .mf-settings-head, html:root .mf-bots-head, html:root .mf-profile-head, html:root .mf-detail-head { margin-bottom: 22px; }
+html:root .hm-sec__head, html:root .mf-section-heading { margin-bottom: 12px; }
+
+/* 3e. Yon panel va yuqori panel: yassi, yumshoq chiziq */
+html:root .mf-sidebar { background: var(--surface); border-right: 1px solid var(--border); box-shadow: none; }
+html:root .mf-topbar { background: color-mix(in srgb, var(--bg) 86%, transparent); border-bottom: 1px solid var(--border); backdrop-filter: blur(12px); box-shadow: none; }
+
+/* 3f. Harakat: yengil; foydalanuvchi "kamaytirilgan harakat" so'rasa — o'chiriladi */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
+

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="uz">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover" />
+    <title>Makefy — Telegram botlar boshqaruvi</title>
+    <link rel="icon" type="image/png" href="/makefy-logo.png" />
+    <meta name="theme-color" content="#071421" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script>
+      /* FOUC bo'lmasligi uchun: React yuklanguncha tanlangan mavzuni (mf_tema) darrov qo'llaymiz.
+         Kalit src/lib/theme.js bilan bir xil: 'system' | 'light' | 'dark'. */
+      (function () {
+        var scheme = 'dark';
+        try {
+          var pref = localStorage.getItem('mf_tema');
+          if (pref !== 'light' && pref !== 'dark') {
+            var tg = window.Telegram && window.Telegram.WebApp;
+            if (tg && (tg.colorScheme === 'light' || tg.colorScheme === 'dark')) scheme = tg.colorScheme;
+            else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) scheme = 'light';
+          } else { scheme = pref; }
+        } catch (e) {}
+        var root = document.documentElement;
+        root.setAttribute('data-theme', scheme);
+        root.style.colorScheme = scheme;
+        var m = document.querySelector('meta[name="theme-color"]');
+        if (m) m.setAttribute('content', scheme === 'dark' ? '#071421' : '#f3f8f5');
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

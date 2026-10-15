@@ -1,0 +1,54 @@
+/* ===== Mavzu (kun/tun) tuzatishlari =====
+   Asosiy muammolar: qattiq yozilgan oq ranglar tun rejimida matnni ko'rinmas qilardi
+   (fokusdagi input, hover tugmalar), pastel binafsha ikonalar tunda juda yorqin edi,
+   tun rejimida brauzer elementlari (scrollbar, select) kun ranglarida chiqardi. */
+
+html[data-theme="dark"]{color-scheme:dark}
+html[data-theme="light"]{color-scheme:light}
+
+/* Fokusdagi input/textarea: tunda oq fon + oq matn = ko'rinmas matn edi */
+html[data-theme="dark"] .mf-search input:focus,
+html[data-theme="dark"] .mf-token-form input:focus,
+html[data-theme="dark"] .mf-page input:focus,
+html[data-theme="dark"] .mf-page textarea:focus,
+html[data-theme="dark"] .mf-page select:focus,
+html[data-theme="dark"] .mf-create-layout input:focus,
+html[data-theme="dark"] .mf-create-layout textarea:focus{
+  background:var(--surface-2);
+  color:var(--text);
+  border-color:var(--accent);
+}
+html[data-theme="dark"] .mf-page ::placeholder,
+html[data-theme="dark"] .mf-create-layout ::placeholder{color:var(--text-dim)}
+html[data-theme="dark"] .mf-page select option{background:var(--surface);color:var(--text)}
+
+/* Hover: tunda oq fon ustida oq ikona */
+html[data-theme="dark"] .mf-icon-button:hover{background:var(--surface-3);color:var(--text)}
+
+/* Pastel binafsha ikonalar */
+html[data-theme="dark"] .mf-metric-card--violet .mf-metric-card__icon,
+html[data-theme="dark"] .mf-action-card--violet .mf-action-card__icon,
+html[data-theme="dark"] .mf-focus-item__icon--violet,
+html[data-theme="dark"] .mf-bots-summary-card--violet>span,
+html[data-theme="dark"] .dp-tpl__icon--violet{color:#b9a2ff;background:rgba(125,98,196,.20)}
+
+/* Tarif nishoni, bildirishnomalar */
+html[data-theme="dark"] .mf-plan-pill{color:#eab95f;background:rgba(234,185,95,.14);border-color:rgba(234,185,95,.32)}
+html[data-theme="dark"] .mf-toast--success,
+html[data-theme="dark"] .mf-notice--ok{border-color:rgba(91,227,167,.38)}
+html[data-theme="dark"] .mf-toast--error,
+html[data-theme="dark"] .mf-notice--err{border-color:rgba(255,113,128,.38)}
+html[data-theme="dark"] .mf-filter-pill.is-active{border-color:rgba(32,233,146,.45)}
+
+/* Kun rejimida yangi dashboard elementlari */
+html[data-theme="light"] .dp-chip.is-on{color:var(--accent-dim)}
+
+/* Mavzu tanlagich: tanlangan variant tunda ham aniq ko'rinsin, hint matni */
+html[data-theme="dark"] .mf-theme-choice.is-active{border-color:rgba(32,233,146,.45)}
+.mf-theme-hint{margin:0;padding:10px 14px 12px;font-size:12px;line-height:1.5;color:var(--text-muted)}
+.mf-theme-hint i{margin-right:6px;color:var(--accent-dim)}
+
+/* Mavzu almashganda silliq o'tish (harakatlarni kamaytirish yoqilgan bo'lsa — o'chadi) */
+html.mf-theme-fade,html.mf-theme-fade *,html.mf-theme-fade *::before,html.mf-theme-fade *::after{
+  transition:background-color .25s ease,color .25s ease,border-color .25s ease,fill .25s ease!important;
+}

@@ -1,0 +1,22 @@
+/* Shablon katalogi (Create), yaratish natijasi va bot tafsilotlari uchun qo'shimcha uslublar.
+   Faqat mavjud tema tokenlaridan (--surface, --border, --accent ...) foydalanadi — kun/tun rejimiga moslashadi. */
+.mf-tpl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.mf-tpl-card{position:relative;display:flex;align-items:flex-start;gap:14px;padding:16px;text-align:left;color:var(--text);border:1px solid var(--border);border-radius:var(--radius-lg);background:var(--surface);cursor:pointer;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
+.mf-tpl-card:hover{transform:translateY(-2px);border-color:var(--accent);box-shadow:var(--shadow-card)}
+.mf-tpl-card__icon{width:52px;height:52px;flex:0 0 auto;display:grid;place-items:center;font-size:26px;border-radius:16px;background:var(--accent-soft)}
+.mf-tpl-card--anime .mf-tpl-card__icon{background:linear-gradient(135deg,#ffe3ec,#e8e1ff)}
+.mf-tpl-card--stars .mf-tpl-card__icon{background:linear-gradient(135deg,#fff3c4,#ffe0a8)}
+.mf-tpl-card__body{display:grid;gap:5px;min-width:0;padding-right:18px}
+.mf-tpl-card__body b{font-size:14px;line-height:1.25}
+.mf-tpl-card__body small{color:var(--text-muted);font-size:12px;line-height:1.45}
+.mf-tpl-card__meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.mf-tpl-card__meta em{font-style:normal;padding:3px 8px;font-size:10.5px;font-weight:700;color:var(--text-muted);border:1px solid var(--border);border-radius:999px;background:var(--surface-2)}
+.mf-tpl-card__meta em:nth-child(2){color:var(--accent-dim);background:var(--accent-soft);border-color:transparent}
+.mf-tpl-card__arrow{position:absolute;right:16px;top:18px;font-size:11px;color:var(--text-dim)}
+.mf-tpl-desc{margin-bottom:16px;padding:16px;white-space:pre-line;font-size:12.5px;line-height:1.65;color:var(--text);border:1px solid var(--border);border-radius:var(--radius-md);background:var(--surface)}
+.mf-cred-card{max-width:340px;margin:0 auto 18px;padding:14px;text-align:left;border:1px dashed var(--border-light);border-radius:var(--radius-md);background:var(--surface-2)}
+.mf-cred-card p{margin-top:10px;font-size:11px;color:var(--text-muted)}
+.mf-cred-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mf-cred-grid small{display:block;margin-bottom:4px;font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--text-muted)}
+.mf-cred-grid code{display:block;padding:9px 10px;overflow-x:auto;font-size:13px;font-weight:700;border:1px solid var(--border);border-radius:9px;background:var(--surface);user-select:all}
+@media (max-width:520px){.mf-tpl-grid{grid-template-columns:1fr}.mf-cred-grid{grid-template-columns:1fr}}

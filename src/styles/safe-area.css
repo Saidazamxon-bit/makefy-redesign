@@ -1,0 +1,33 @@
+/* Telegram to'liq ekran + safe area. Oxirgi ulanadi. Qiymatlar JS (telegramFullscreen.js) yoki Telegram SDK orqali keladi;
+   brauzerda env() ishlaydi, hech narsa bo'lmasa 0. */
+:root{
+  --app-top:calc(max(env(safe-area-inset-top,0px),var(--tg-safe-area-inset-top,0px)) + var(--tg-content-safe-area-inset-top,0px));
+  --app-bottom:calc(max(env(safe-area-inset-bottom,0px),var(--tg-safe-area-inset-bottom,0px)) + var(--tg-content-safe-area-inset-bottom,0px));
+  --app-left:max(env(safe-area-inset-left,0px),var(--tg-safe-area-inset-left,0px));
+  --app-right:max(env(safe-area-inset-right,0px),var(--tg-safe-area-inset-right,0px));
+  --app-vh:100dvh;
+}
+html,body{min-height:var(--app-vh);background:var(--bg)}
+:root:root .app-shell{min-height:var(--app-vh)}
+
+/* Yuqori panel: o'yiq (notch) va Telegram tugmalari ostida qolmasin */
+:root:root .mf-topbar{padding-top:var(--app-top);min-height:calc(56px + var(--app-top))}
+:root:root .mf-topbar__inner{padding-left:var(--app-left);padding-right:var(--app-right)}
+:root:root .mf-notif-panel{top:calc(var(--app-top) + 64px)}
+:root:root .mf-sidebar{padding-top:var(--app-top)}
+
+/* Pastki navigatsiya: home indicator ustida */
+@media(max-width:760px){
+  :root:root .mf-bottom-nav{padding-bottom:max(6px,var(--app-bottom));padding-left:var(--app-left);padding-right:var(--app-right);min-height:calc(58px + var(--app-bottom))}
+  :root:root .app-main{padding-bottom:calc(84px + var(--app-bottom))}
+  :root:root .mf-create-tabs{top:calc(56px + var(--app-top))}
+}
+
+/* Kirish va boshqa topbarsiz ekranlar */
+#root>:not(.app-shell):not(.sh){padding-top:var(--app-top);padding-bottom:var(--app-bottom);box-sizing:border-box}
+
+/* Modal/pastdan chiquvchi oynalar */
+[role="dialog"]{max-height:calc(var(--app-vh) - var(--app-top) - 12px);padding-bottom:max(16px,var(--app-bottom))}
+
+/* Chat sahifalari: 100vh o'rniga haqiqiy ko'rinadigan balandlik */
+:root:root .mf-page--chat{height:calc(var(--app-vh) - var(--app-top) - 56px - 76px - var(--app-bottom))!important}

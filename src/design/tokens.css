@@ -1,0 +1,103 @@
+/* =====================================================================
+   MAKEFY DESIGN TOKENS — yagona haqiqat manbai (kun / tun / tizim)
+   Nomlar (--bg, --surface, --text, --accent ...) Telegram "tizim" mavzusi bilan mos (lib/theme.js shularni almashtiradi).
+   ===================================================================== */
+:root {
+  /* Yuzalar */
+  --bg: #f6f7f5;
+  --surface: #ffffff;
+  --surface-2: #f0f2ef;
+  --surface-3: #e6e9e5;
+  --surface-4: #d9ded8;
+  /* Chegaralar */
+  --border: #e2e6e0;
+  --border-light: #cdd4cb;
+  /* Matn (kontrast: --text 16:1, --text-muted 5.9:1, --text-dim 3.6:1 faqat yordamchi) */
+  --text: #111815;
+  --text-muted: #55625b;
+  --text-dim: #7d8a83;
+  /* Brend yashil: --accent — urg'u/belgilar; --accent-dim — to'ldirilgan tugma (oq matn bilan 5.4:1) */
+  --accent: #0e9f64;
+  --accent-dim: #0a7f4f;
+  --accent-text: #ffffff;
+  --accent-soft: #e5f4ec;
+  /* Holat ranglari */
+  --success: #0b7f4e;  --success-soft: #e5f4ec;
+  --warn: #a15c00;     --warn-soft: #fdf1dc;
+  --danger: #c4312c;   --danger-soft: #fdeceb;
+  --info: #1f6fd1;     --info-soft: #e7f0fc;
+
+  /* Fokus halqasi */
+  --focus-ring: 0 0 0 3px color-mix(in srgb, var(--accent) 38%, transparent);
+
+  /* Radius */
+  --radius-xs: 6px; --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px; --radius-xl: 20px; --radius-pill: 999px;
+
+  /* Soyalar (yumshoq, qatlamli) */
+  --shadow-1: 0 1px 2px rgba(16, 24, 20, .05);
+  --shadow-2: 0 1px 2px rgba(16, 24, 20, .04), 0 4px 14px rgba(16, 24, 20, .05);
+  --shadow-3: 0 2px 4px rgba(16, 24, 20, .05), 0 12px 30px rgba(16, 24, 20, .09);
+  --shadow-pop: 0 8px 30px rgba(16, 24, 20, .16);
+  --shadow-card: var(--shadow-2);
+  --shadow-card-hover: var(--shadow-3);
+
+  /* Oraliq (4px asosli) */
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 20px; --sp-6: 24px; --sp-8: 32px; --sp-10: 40px;
+
+  /* Tipografiya */
+  --fs-xs: 12px; --fs-sm: 13.5px; --fs-md: 15px; --fs-lg: 18px; --fs-xl: 22px; --fs-2xl: clamp(24px, 3vw, 30px);
+  --lh-tight: 1.2; --lh-base: 1.55;
+
+  /* Harakat */
+  --dur-1: 120ms; --dur-2: 200ms; --dur-3: 320ms;
+  --ease: cubic-bezier(.2, .7, .2, 1);
+
+  /* Qobiq o'lchamlari */
+  --sh-side: 248px; --sh-side-compact: 72px; --sh-top: 60px; --sh-bottom: 64px; --sh-max: 1180px;
+
+  /* Eski nomlar (moslik) */
+  --mf-brand: var(--accent-dim);
+  --mf-brand-hover: color-mix(in srgb, var(--accent-dim) 88%, #000);
+  --mf-on-brand: var(--accent-text);
+  --mf-shadow: var(--shadow-2);
+  --mf-shadow-hover: var(--shadow-3);
+  --mf-ease: var(--ease);
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0a100d;
+  --surface: #111915;
+  --surface-2: #17211c;
+  --surface-3: #1e2b25;
+  --surface-4: #27372f;
+  --border: rgba(255, 255, 255, .075);
+  --border-light: rgba(255, 255, 255, .14);
+  --text: #edf2ef;
+  --text-muted: #a0aea7;
+  --text-dim: #7a8982;
+  --accent: #34d399;
+  --accent-dim: #2bc48a;
+  --accent-text: #04180f;
+  --accent-soft: rgba(52, 211, 153, .12);
+  --success: #4ade9a;  --success-soft: rgba(74, 222, 154, .12);
+  --warn: #f2b84b;     --warn-soft: rgba(242, 184, 75, .13);
+  --danger: #ff7b72;   --danger-soft: rgba(255, 123, 114, .13);
+  --info: #6aa8ff;     --info-soft: rgba(106, 168, 255, .13);
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, .35);
+  --shadow-2: 0 1px 2px rgba(0, 0, 0, .3), 0 6px 20px rgba(0, 0, 0, .2);
+  --shadow-3: 0 2px 4px rgba(0, 0, 0, .35), 0 14px 34px rgba(0, 0, 0, .32);
+  --shadow-pop: 0 10px 36px rgba(0, 0, 0, .5);
+}
+
+html:root body, html[data-theme="dark"] body, html[data-theme-preference="system"] body {
+  background: var(--bg); color: var(--text);
+  font-size: var(--fs-md); line-height: var(--lh-base);
+  -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+}
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+::selection { background: color-mix(in srgb, var(--accent) 28%, transparent); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+}

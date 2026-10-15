@@ -1,0 +1,42 @@
+/* "Qanday ishlaydi" — landing tanishuv bo'limi. Ranglar .makefy-landing tokenlaridan (mf-design.css). */
+.mf-story { margin: 88px auto 0; padding: 72px 0 24px; border-top: 1px solid var(--border); color: var(--text); }
+.mf-story__heading { max-width: 640px; margin-bottom: 36px; }
+.mf-story__eyebrow { display: inline-flex; align-items: center; gap: 8px; color: var(--mf-brand); font-size: .75rem; font-weight: 650; letter-spacing: .1em; text-transform: uppercase; }
+.mf-story__eyebrow i { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.mf-story__heading h2 { margin-top: 12px; color: var(--text); font-size: clamp(1.8rem, 3.6vw, 2.7rem); font-weight: 700; letter-spacing: -.04em; line-height: 1.1; text-wrap: balance; }
+.mf-story__heading p { margin-top: 12px; color: var(--text-muted); font-size: 1rem; line-height: 1.65; max-width: 54ch; }
+
+.mf-story__layout { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(280px, .8fr); gap: 24px; align-items: start; }
+.mf-story__steps { display: grid; gap: 12px; list-style: none; margin: 0; padding: 0; }
+.mf-story__step {
+  display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 16px; align-items: start; position: relative;
+  padding: 20px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--mf-shadow);
+  transition: border-color .2s var(--mf-ease), box-shadow .2s var(--mf-ease);
+}
+.mf-story__step:hover { border-color: var(--border-light); box-shadow: var(--mf-shadow-hover); }
+.mf-story__number { position: absolute; top: 16px; right: 18px; color: var(--text-dim); font-size: .78rem; font-weight: 650; font-variant-numeric: tabular-nums; }
+.mf-story__step-icon { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 12px; background: var(--accent-soft); color: var(--mf-brand); }
+.mf-story__step h3 { color: var(--text); font-size: 1.02rem; font-weight: 650; letter-spacing: -.02em; line-height: 1.3; }
+.mf-story__step p { margin-top: 6px; color: var(--text-muted); font-size: .92rem; line-height: 1.6; }
+
+.mf-story__workspace { padding: 20px; background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius-lg); display: grid; gap: 16px; }
+.mf-story__workspace-head { display: flex; align-items: center; gap: 12px; }
+.mf-story__workspace-mark { width: 40px; height: 40px; border-radius: 12px; overflow: hidden; background: var(--surface); border: 1px solid var(--border); display: grid; place-items: center; }
+.mf-story__workspace-mark img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.mf-story__workspace-head b { display: block; color: var(--text); font-size: .98rem; font-weight: 650; }
+.mf-story__workspace-head small { color: var(--text-muted); font-size: .8rem; }
+.mf-story__workspace-list { display: grid; gap: 8px; }
+.mf-story__workspace-item { display: flex; align-items: center; gap: 12px; padding: 12px 14px; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; color: var(--text-muted); }
+.mf-story__workspace-item span { width: 32px; height: 32px; display: grid; place-items: center; border-radius: 10px; background: var(--accent-soft); color: var(--mf-brand); }
+.mf-story__workspace-item b { flex: 1; color: var(--text); font-size: .92rem; font-weight: 600; }
+.mf-story__cta {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 46px; padding: 0 18px; border-radius: var(--radius-md);
+  background: var(--mf-brand); color: var(--mf-on-brand); font-weight: 650; font-size: .92rem; text-decoration: none; transition: background .18s var(--mf-ease);
+}
+.mf-story__cta:hover { background: var(--mf-brand-hover); }
+.mf-story__cta:focus-visible { outline: 2px solid var(--mf-brand); outline-offset: 3px; }
+
+@media (max-width: 900px) {
+  .mf-story { margin-top: 56px; padding-top: 48px; }
+  .mf-story__layout { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,1357 @@
+/* ==========================================================================
+   Makefy Landing Page — Modern Dual-Theme (Day / Night) & Tech Grid Background
+   ========================================================================== */
+
+/* ---------- 1. DARK THEME TOKENS (TUN REJIMI) ---------- */
+html:root:root .makefy-landing,
+html[data-theme="dark"]:root:root .makefy-landing {
+  --bg: #070e0b; 
+  --surface: rgba(17, 27, 23, 0.75); 
+  --surface-2: rgba(22, 34, 29, 0.82); 
+  --surface-3: #1d2c26;
+  --border: rgba(255, 255, 255, .08); 
+  --border-light: rgba(47, 214, 143, .35);
+  --text: #eef3f0; 
+  --text-muted: rgba(238, 243, 240, .72); 
+  --text-dim: rgba(238, 243, 240, .5);
+  --mf-brand: #2fd68f; 
+  --mf-brand-hover: #4ae0a1; 
+  --mf-on-brand: #04180f;
+  --accent-soft: rgba(47, 214, 143, .14);
+  --mf-shadow: 0 4px 20px rgba(0, 0, 0, .35), 0 12px 36px rgba(0, 0, 0, .25);
+  --card-bg: rgba(17, 27, 23, 0.75);
+  --card-hover-bg: rgba(22, 34, 29, 0.9);
+  --header-border: rgba(255, 255, 255, 0.09);
+  background: var(--bg); 
+  color: var(--text);
+  position: relative;
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ---------- 2. LIGHT THEME TOKENS (KUN REJIMI) ---------- */
+html[data-theme="light"]:root:root .makefy-landing {
+  --bg: #f5f8f6; 
+  --surface: rgba(255, 255, 255, 0.85); 
+  --surface-2: rgba(238, 246, 241, 0.95); 
+  --surface-3: #e2ece5;
+  --border: rgba(16, 185, 129, 0.14); 
+  --border-light: rgba(16, 185, 129, 0.38);
+  --text: #0f1e17; 
+  --text-muted: #3f554a; 
+  --text-dim: #6d857a;
+  --mf-brand: #059669; 
+  --mf-brand-hover: #047857; 
+  --mf-on-brand: #ffffff;
+  --accent-soft: rgba(16, 185, 129, 0.12);
+  --mf-shadow: 0 4px 20px rgba(0, 0, 0, .06), 0 12px 36px rgba(16, 185, 129, .06);
+  --card-bg: rgba(255, 255, 255, 0.88);
+  --card-hover-bg: #ffffff;
+  --header-border: rgba(16, 185, 129, 0.15);
+  background: var(--bg); 
+  color: var(--text);
+}
+
+/* Background Wrapper */
+.makefy-landing__bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+  transition: opacity 0.35s ease;
+}
+
+/* 1. Katak-katak panjara (Dual Grid: 36px kichik kataklar, 144px katta bloklar) */
+.makefy-landing__grid {
+  position: absolute;
+  inset: -60px;
+  background-image: 
+    linear-gradient(to right, rgba(47, 214, 143, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(47, 214, 143, 0.08) 1px, transparent 1px),
+    linear-gradient(to right, rgba(47, 214, 143, 0.18) 1.2px, transparent 1.2px),
+    linear-gradient(to bottom, rgba(47, 214, 143, 0.18) 1.2px, transparent 1.2px);
+  background-size: 36px 36px, 36px 36px, 144px 144px, 144px 144px;
+  mask-image: radial-gradient(ellipse 90% 75% at 50% 20%, #000 35%, transparent 88%);
+  -webkit-mask-image: radial-gradient(ellipse 90% 75% at 50% 20%, #000 35%, transparent 88%);
+  transition: opacity 0.35s ease;
+}
+
+html[data-theme="light"]:root:root .makefy-landing .makefy-landing__grid {
+  background-image: 
+    linear-gradient(to right, rgba(16, 185, 129, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(16, 185, 129, 0.08) 1px, transparent 1px),
+    linear-gradient(to right, rgba(16, 185, 129, 0.18) 1.2px, transparent 1.2px),
+    linear-gradient(to bottom, rgba(16, 185, 129, 0.18) 1.2px, transparent 1.2px);
+  mask-image: radial-gradient(ellipse 90% 75% at 50% 20%, #000 45%, transparent 92%);
+  -webkit-mask-image: radial-gradient(ellipse 90% 75% at 50% 20%, #000 45%, transparent 92%);
+}
+
+/* 2. Kesishgan nuqtalar (Grid intersection dots / glowing crosshairs) */
+.makefy-landing__dots {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(47, 214, 143, 0.45) 1.2px, transparent 1.2px);
+  background-size: 36px 36px;
+  mask-image: radial-gradient(ellipse 70% 55% at 50% 22%, #000 25%, transparent 85%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 55% at 50% 22%, #000 25%, transparent 85%);
+  opacity: 0.85;
+}
+
+html[data-theme="light"]:root:root .makefy-landing .makefy-landing__dots {
+  background-image: radial-gradient(circle, rgba(16, 185, 129, 0.35) 1.2px, transparent 1.2px);
+  opacity: 0.7;
+}
+
+/* 3. Yuqori nur chizig'i (Top glowing light beam) */
+.makefy-landing__beam {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(1000px, 90vw);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(47, 214, 143, 0.8) 50%, transparent);
+  box-shadow: 0 0 25px 2px rgba(47, 214, 143, 0.5);
+  opacity: 0.8;
+}
+
+html[data-theme="light"]:root:root .makefy-landing .makefy-landing__beam {
+  background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.6) 50%, transparent);
+  box-shadow: 0 0 20px 2px rgba(16, 185, 129, 0.25);
+}
+
+/* 4. Aurora orblar (Glowing ambient lights) */
+.makefy-landing__glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(85px);
+  pointer-events: none;
+}
+
+.makefy-landing__glow--hero {
+  top: -180px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 780px;
+  height: 480px;
+  background: radial-gradient(ellipse at center, rgba(47, 214, 143, 0.24) 0%, rgba(16, 185, 129, 0.1) 45%, transparent 75%);
+  animation: makefy-glow-pulse 8s ease-in-out infinite alternate;
+}
+
+html[data-theme="light"]:root:root .makefy-landing .makefy-landing__glow--hero {
+  background: radial-gradient(ellipse at center, rgba(16, 185, 129, 0.18) 0%, rgba(56, 189, 248, 0.08) 45%, transparent 75%);
+}
+
+.makefy-landing__glow--cyan {
+  top: 10%;
+  right: -80px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.14) 0%, rgba(47, 214, 143, 0.04) 50%, transparent 70%);
+  animation: makefy-glow-float 12s ease-in-out infinite alternate;
+}
+
+html[data-theme="light"]:root:root .makefy-landing .makefy-landing__glow--cyan {
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.1) 0%, rgba(16, 185, 129, 0.04) 50%, transparent 70%);
+}
+
+.makefy-landing__glow--mid {
+  top: 45%;
+  left: -100px;
+  width: 550px;
+  height: 550px;
+  background: radial-gradient(circle, rgba(47, 214, 143, 0.12) 0%, rgba(14, 165, 233, 0.03) 50%, transparent 70%);
+  animation: makefy-glow-float 16s ease-in-out infinite alternate-reverse;
+}
+
+html[data-theme="light"]:root:root .makefy-landing .makefy-landing__glow--mid {
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.08) 0%, rgba(14, 165, 233, 0.03) 50%, transparent 70%);
+}
+
+/* 5. Vignette (Qirralarni yumshatuvchi qorong'ilik) */
+.makefy-landing__vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 40%, rgba(7, 14, 11, 0.65) 100%);
+  pointer-events: none;
+}
+
+html[data-theme="light"]:root:root .makefy-landing .makefy-landing__vignette {
+  background: radial-gradient(ellipse at center, transparent 45%, rgba(245, 248, 246, 0.65) 100%);
+}
+
+@keyframes makefy-glow-pulse {
+  0% {
+    opacity: 0.7;
+    transform: translateX(-50%) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) scale(1.06);
+  }
+}
+
+@keyframes makefy-glow-float {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-30px, 35px);
+  }
+  100% {
+    transform: translate(25px, -20px);
+  }
+}
+
+/* ---------- 3. NAVIGATION & THEME TOGGLE BUTTON ---------- */
+html:root:root .makefy-landing .makefy-header--landing {
+  border-bottom: 1px solid var(--header-border);
+  transition: border-color 0.25s ease;
+}
+
+html:root:root .makefy-landing .makefy-brand__name {
+  color: var(--text);
+  transition: color 0.25s ease;
+}
+
+html:root:root .makefy-landing .makefy-landing-nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+html:root:root .makefy-landing .makefy-landing-nav__link {
+  border: 1px solid var(--border); 
+  background: var(--surface); 
+  color: var(--text-muted);
+  border-radius: var(--radius-md); 
+  font-size: .82rem; 
+  font-weight: 600; 
+  transition: background .18s var(--mf-ease), color .18s, border-color .18s;
+  backdrop-filter: blur(8px);
+}
+html:root:root .makefy-landing .makefy-landing-nav__link:hover { 
+  background: var(--surface-2); 
+  color: var(--text); 
+  transform: none; 
+}
+html:root:root .makefy-landing .makefy-landing-nav__link--primary { 
+  background: var(--mf-brand); 
+  border-color: transparent; 
+  color: var(--mf-on-brand); 
+}
+html:root:root .makefy-landing .makefy-landing-nav__link--primary:hover { 
+  background: var(--mf-brand-hover); 
+  color: var(--mf-on-brand); 
+}
+
+/* KUN / TUN REJIMI TUGMASI (THEME TOGGLE) */
+html:root:root .makefy-landing-nav__theme-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  cursor: pointer;
+  padding: 0;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.2s ease,
+              border-color 0.2s ease,
+              box-shadow 0.2s ease,
+              color 0.2s ease;
+}
+
+html:root:root .makefy-landing-nav__theme-btn .mf-theme-toggle__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Tun rejimida: quyosh belgisi (issiq oltin nur bilan) */
+html:root:root .makefy-landing-nav__theme-btn.is-dark,
+html[data-theme="dark"]:root:root .makefy-landing-nav__theme-btn {
+  color: #fbbf24;
+  border-color: rgba(251, 191, 36, 0.25);
+  background: rgba(17, 27, 23, 0.7);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+}
+
+html:root:root .makefy-landing-nav__theme-btn.is-dark:hover,
+html[data-theme="dark"]:root:root .makefy-landing-nav__theme-btn:hover {
+  transform: translateY(-2px) scale(1.06);
+  border-color: #fbbf24;
+  background: rgba(25, 40, 34, 0.9);
+  box-shadow: 0 4px 18px rgba(251, 191, 36, 0.3);
+}
+
+html:root:root .makefy-landing-nav__theme-btn.is-dark:hover .mf-theme-toggle__icon,
+html[data-theme="dark"]:root:root .makefy-landing-nav__theme-btn:hover .mf-theme-toggle__icon {
+  transform: rotate(25deg);
+}
+
+/* Kun rejimida: oy belgisi (yashil/smaragd nur bilan) */
+html[data-theme="light"]:root:root .makefy-landing-nav__theme-btn.is-light,
+html[data-theme="light"]:root:root .makefy-landing-nav__theme-btn {
+  color: #059669;
+  border-color: rgba(16, 185, 129, 0.25);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+html[data-theme="light"]:root:root .makefy-landing-nav__theme-btn.is-light:hover,
+html[data-theme="light"]:root:root .makefy-landing-nav__theme-btn:hover {
+  transform: translateY(-2px) scale(1.06);
+  border-color: #059669;
+  background: #ffffff;
+  box-shadow: 0 4px 18px rgba(16, 185, 129, 0.2);
+}
+
+html[data-theme="light"]:root:root .makefy-landing-nav__theme-btn.is-light:hover .mf-theme-toggle__icon,
+html[data-theme="light"]:root:root .makefy-landing-nav__theme-btn:hover .mf-theme-toggle__icon {
+  transform: rotate(-25deg);
+}
+
+html:root:root .makefy-landing-nav__theme-btn:active {
+  transform: translateY(0) scale(0.95);
+}
+
+/* ---------- 4. BUTTONS & HERO ACTIONS ---------- */
+html:root:root .makefy-landing .makefy-primary-landing { 
+  background: var(--mf-brand); 
+  color: var(--mf-on-brand); 
+  border-color: transparent; 
+  min-height: 48px; 
+  box-shadow: 0 4px 20px rgba(47, 214, 143, 0.28); 
+  transition: background .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+html:root:root .makefy-landing .makefy-primary-landing:hover { 
+  background: var(--mf-brand-hover); 
+  transform: translateY(-1px); 
+  box-shadow: 0 6px 24px rgba(47, 214, 143, 0.38); 
+}
+html:root:root .makefy-landing .makefy-secondary-landing { 
+  background: var(--surface); 
+  backdrop-filter: blur(8px); 
+  border: 1px solid var(--border-light); 
+  color: var(--text); 
+  min-height: 48px; 
+  transition: background .2s ease, transform .2s ease, border-color .2s ease;
+}
+html:root:root .makefy-landing .makefy-secondary-landing:hover { 
+  background: var(--surface-2); 
+  transform: translateY(-1px); 
+}
+html:root:root .makefy-landing .makefy-button-primary { 
+  background: var(--mf-brand); 
+  color: var(--mf-on-brand); 
+  box-shadow: none; 
+  border-radius: var(--radius-md); 
+}
+
+/* ---------- 5. TYPOGRAPHY ---------- */
+html:root:root .makefy-landing .makefy-hero h1 { 
+  font-size: clamp(2.1rem, 4.4vw, 3.4rem); 
+  font-weight: 700; 
+  letter-spacing: -.04em; 
+  line-height: 1.06; 
+  color: var(--text); 
+  transition: color 0.25s ease;
+}
+html:root:root .makefy-landing .makefy-hero h1 span { 
+  color: var(--mf-brand); 
+  background: none; 
+  -webkit-text-fill-color: currentColor; 
+}
+html:root:root .makefy-landing .makefy-hero__description { 
+  color: var(--text-muted); 
+  transition: color 0.25s ease;
+}
+html:root:root .makefy-landing .makefy-eyebrow { 
+  color: var(--mf-brand); 
+  background: var(--accent-soft); 
+  border: 1px solid var(--border-light); 
+  border-radius: 999px; 
+  box-shadow: 0 0 16px rgba(47, 214, 143, 0.12); 
+}
+html:root:root .makefy-landing .makefy-hero__visual { 
+  min-height: 0; 
+  display: block; 
+}
+html:root:root .makefy-landing .makefy-proof__avatars { 
+  display: none; 
+}
+
+/* Proof matni (Hammasi tayyor. Barcha boshqaruvlar bir joyda) har ikki rejimda aniq ko'rinishi */
+html:root:root .makefy-landing .makefy-proof {
+  color: var(--text-muted) !important;
+  font-weight: 450;
+  margin-top: 22px;
+}
+
+html:root:root .makefy-landing .makefy-proof strong {
+  color: var(--text) !important;
+  font-weight: 600;
+}
+
+html[data-theme="light"]:root:root .makefy-landing .makefy-proof {
+  color: #3b5045 !important;
+}
+
+html[data-theme="light"]:root:root .makefy-landing .makefy-proof strong {
+  color: #0f1e17 !important;
+}
+
+/* ---------- 6. CARDS & GLASSMORPHISM ---------- */
+html:root:root .makefy-landing .makefy-home-card, 
+html:root:root .makefy-landing .makefy-pricing-card,
+html:root:root .makefy-landing .makefy-faq-item, 
+html:root:root .makefy-landing .makefy-home-support {
+  background: var(--card-bg); 
+  border: 1px solid var(--border); 
+  border-radius: var(--radius-lg); 
+  box-shadow: var(--mf-shadow);
+  backdrop-filter: blur(14px); 
+  -webkit-backdrop-filter: blur(14px);
+  transition: transform .22s cubic-bezier(0.16, 1, 0.3, 1), 
+              border-color .22s ease, 
+              box-shadow .22s ease, 
+              background-color .25s ease;
+}
+
+html:root:root .makefy-landing .makefy-home-card:hover, 
+html:root:root .makefy-landing .makefy-pricing-card:hover, 
+html:root:root .makefy-landing .makefy-faq-item:hover {
+  background: var(--card-hover-bg); 
+  border-color: var(--border-light); 
+  transform: translateY(-3px);
+  box-shadow: var(--mf-shadow);
+}
+
+html:root:root .makefy-landing .makefy-pricing-card.is-featured { 
+  border-color: var(--mf-brand); 
+  background: var(--surface-2); 
+  box-shadow: 0 8px 30px rgba(0, 0, 0, .15), 0 0 25px rgba(47, 214, 143, .12); 
+}
+
+html:root:root .makefy-landing .makefy-home-support { 
+  background: var(--surface-2); 
+}
+
+html:root:root .makefy-landing .makefy-home-card h3, 
+html:root:root .makefy-landing .makefy-faq-item b,
+html:root:root .makefy-landing .makefy-pricing-card strong, 
+html:root:root .makefy-landing .makefy-home-support h2,
+html:root:root .makefy-landing .makefy-home-section__header h2 { 
+  color: var(--text); 
+  transition: color 0.25s ease;
+}
+
+html:root:root .makefy-landing .makefy-home-card p, 
+html:root:root .makefy-landing .makefy-faq-item p,
+html:root:root .makefy-landing .makefy-pricing-card p, 
+html:root:root .makefy-landing .makefy-pricing-card small,
+html:root:root .makefy-landing .makefy-home-section__text { 
+  color: var(--text-muted); 
+  transition: color 0.25s ease;
+}
+
+html:root:root .makefy-landing .makefy-home-card span { 
+  background: var(--accent-soft); 
+  border-color: transparent; 
+  color: var(--mf-brand); 
+}
+
+html:root:root .makefy-landing .makefy-home-section__eyebrow { 
+  color: var(--mf-brand); 
+}
+
+/* ---------- 7. HERO PREVIEW CARD (ANIMATED & INTERACTIVE) ---------- */
+.mf-preview-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 530px;
+  margin-inline: auto;
+  perspective: 1200px;
+}
+
+/* Ambient glow underneath the window */
+.mf-preview-aura {
+  position: absolute;
+  inset: -15px;
+  border-radius: 32px;
+  background: radial-gradient(circle at 50% 40%, rgba(47, 214, 143, 0.22) 0%, rgba(56, 189, 248, 0.12) 40%, transparent 70%);
+  filter: blur(35px);
+  opacity: 0.65;
+  pointer-events: none;
+  z-index: 0;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  animation: mf-aura-breathe 6s ease-in-out infinite alternate;
+}
+
+.mf-preview-aura.is-active {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+@keyframes mf-aura-breathe {
+  0% { transform: scale(0.96); opacity: 0.55; }
+  100% { transform: scale(1.03); opacity: 0.85; }
+}
+
+/* Window card */
+.mf-preview { 
+  position: relative;
+  z-index: 1;
+  width: 100%; 
+  background: var(--card-bg) !important; 
+  border: 1px solid var(--border-light) !important; 
+  border-radius: 22px; 
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.45), 0 0 35px rgba(47, 214, 143, 0.08) !important; 
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  overflow: hidden; 
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), 
+              background-color 0.25s ease, 
+              border-color 0.25s ease, 
+              box-shadow 0.25s ease;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* Border Beam (Animated rotating edge light) */
+.mf-preview__beam {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  pointer-events: none;
+  background: linear-gradient(
+    135deg,
+    rgba(47, 214, 143, 0.6) 0%,
+    transparent 30%,
+    rgba(56, 189, 248, 0.5) 60%,
+    transparent 85%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0.8;
+  animation: mf-border-shimmer 8s linear infinite;
+}
+
+@keyframes mf-border-shimmer {
+  0% { filter: hue-rotate(0deg); opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { filter: hue-rotate(360deg); opacity: 0.6; }
+}
+
+/* Window Title Bar */
+.mf-preview__bar { 
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between;
+  gap: 12px; 
+  padding: 13px 18px; 
+  border-bottom: 1px solid var(--border); 
+  background: rgba(0, 0, 0, 0.15);
+  font-size: 13px; 
+  font-weight: 600; 
+}
+
+/* Window Dots (macOS style with color and hover glow) */
+.mf-preview__dots { 
+  display: inline-flex; 
+  gap: 7px; 
+}
+
+.mf-preview__dots i { 
+  width: 10px; 
+  height: 10px; 
+  border-radius: 50%; 
+  display: block; 
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mf-preview__dot--red { 
+  background: #ff5f56; 
+  box-shadow: 0 0 6px rgba(255, 95, 86, 0.4); 
+}
+.mf-preview__dot--yellow { 
+  background: #ffbd2e; 
+  box-shadow: 0 0 6px rgba(255, 189, 46, 0.4); 
+}
+.mf-preview__dot--green { 
+  background: #27c93f; 
+  box-shadow: 0 0 6px rgba(39, 201, 63, 0.4); 
+}
+
+.mf-preview:hover .mf-preview__dots i {
+  transform: scale(1.15);
+}
+
+/* Brand tag & Live ping */
+.mf-preview__brand-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.mf-preview__brand-name {
+  color: var(--text);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  font-size: 13px;
+}
+
+.mf-preview__live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(47, 214, 143, 0.15);
+  border: 1px solid rgba(47, 214, 143, 0.3);
+  color: var(--mf-brand);
+  font-size: 11px;
+  font-weight: 650;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.mf-preview__pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--mf-brand);
+  box-shadow: 0 0 8px var(--mf-brand);
+  animation: mf-pulse-dot 1.8s ease-in-out infinite;
+}
+
+@keyframes mf-pulse-dot {
+  0% { transform: scale(0.9); opacity: 0.7; }
+  50% { transform: scale(1.3); opacity: 1; }
+  100% { transform: scale(0.9); opacity: 0.7; }
+}
+
+.mf-preview__bar-right {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-dim);
+  font-size: 11.5px;
+  font-weight: 500;
+}
+
+.mf-preview__secure-icon {
+  color: var(--mf-brand);
+}
+
+/* Body */
+.mf-preview__body { 
+  padding: 16px; 
+  display: grid; 
+  gap: 14px; 
+}
+
+/* Stat cards */
+.mf-preview__stats { 
+  display: grid; 
+  grid-template-columns: repeat(3, minmax(0, 1fr)); 
+  gap: 10px; 
+}
+
+.mf-preview__stat { 
+  padding: 12px 14px; 
+  background: var(--surface-2); 
+  border: 1px solid var(--border);
+  border-radius: 14px; 
+  display: grid; 
+  gap: 4px; 
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.mf-preview__stat:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-light);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+.mf-preview__stat-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mf-preview__stat small { 
+  color: var(--text-muted); 
+  font-size: 11.5px; 
+  font-weight: 550;
+  text-transform: capitalize;
+}
+
+.mf-preview__trend-icon {
+  color: var(--mf-brand);
+  opacity: 0.8;
+}
+
+.mf-preview__stat strong { 
+  font-size: 21px; 
+  font-weight: 750; 
+  letter-spacing: -.03em; 
+  font-variant-numeric: tabular-nums; 
+  color: var(--text); 
+  line-height: 1.1;
+}
+
+.mf-preview__stat-delta {
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--mf-brand);
+}
+
+/* Feature Rows */
+.mf-preview__list { 
+  display: grid; 
+  gap: 9px; 
+}
+
+.mf-preview__row { 
+  display: flex; 
+  align-items: center; 
+  gap: 13px; 
+  padding: 12px 14px; 
+  border: 1px solid var(--border); 
+  border-radius: 14px; 
+  background: var(--surface-2);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), 
+              border-color 0.2s ease, 
+              background-color 0.2s ease, 
+              box-shadow 0.2s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+.mf-preview__row:hover,
+.mf-preview__row.is-active {
+  transform: scale(1.015) translateX(2px);
+  border-color: var(--border-light);
+  background: var(--surface-3);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.2);
+}
+
+.mf-preview__ico { 
+  width: 36px; 
+  height: 36px; 
+  flex: none; 
+  border-radius: 11px; 
+  display: grid; 
+  place-items: center; 
+  background: var(--accent-soft); 
+  color: var(--mf-brand); 
+  border: 1px solid rgba(47, 214, 143, 0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mf-preview__row:hover .mf-preview__ico {
+  transform: scale(1.08) rotate(4deg);
+  box-shadow: 0 0 12px rgba(47, 214, 143, 0.35);
+}
+
+.mf-preview__ico--bots {
+  color: #2fd68f;
+  background: rgba(47, 214, 143, 0.14);
+}
+
+.mf-preview__ico--telegram {
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.14);
+  border-color: rgba(56, 189, 248, 0.2);
+}
+
+.mf-preview__ico--balance {
+  color: #f59e0b;
+  background: rgba(245, 158, 11, 0.14);
+  border-color: rgba(245, 158, 11, 0.2);
+}
+
+.mf-preview__row-info {
+  flex: 1;
+  display: grid;
+  gap: 2px;
+}
+
+.mf-preview__row-info b { 
+  display: block; 
+  font-size: 13.5px; 
+  font-weight: 650; 
+  color: var(--text); 
+}
+
+.mf-preview__row-info small { 
+  color: var(--text-muted); 
+  font-size: 11.5px; 
+  line-height: 1.35;
+}
+
+.mf-preview__row-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.mf-preview__chip { 
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px; 
+  border-radius: 999px; 
+  background: var(--accent-soft); 
+  color: var(--mf-brand); 
+  border: 1px solid rgba(47, 214, 143, 0.25);
+  font-size: 11.5px; 
+  font-weight: 650; 
+  white-space: nowrap; 
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.mf-preview__chip-pulse {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--mf-brand);
+  box-shadow: 0 0 6px var(--mf-brand);
+  animation: mf-pulse-dot 1.5s ease-in-out infinite;
+}
+
+.mf-preview__row-arrow {
+  color: var(--text-dim);
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.mf-preview__row:hover .mf-preview__row-arrow {
+  transform: translateX(3px);
+  color: var(--mf-brand);
+}
+
+/* Live Simulation Ticker at the bottom */
+.mf-preview__ticker {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: rgba(47, 214, 143, 0.08);
+  border: 1px dashed rgba(47, 214, 143, 0.3);
+  animation: mf-ticker-slide-in 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  font-size: 12px;
+}
+
+@keyframes mf-ticker-slide-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.mf-preview__ticker-icon {
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: var(--mf-brand);
+  color: var(--mf-on-brand);
+  display: grid;
+  place-items: center;
+  flex: none;
+  box-shadow: 0 0 10px rgba(47, 214, 143, 0.4);
+}
+
+.mf-preview__ticker-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.mf-preview__ticker-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 700;
+  color: var(--mf-brand);
+  font-size: 11.5px;
+}
+
+.mf-preview__ticker-time {
+  color: var(--text-dim);
+  font-size: 10.5px;
+  font-weight: 500;
+}
+
+.mf-preview__ticker-text {
+  color: var(--text-muted);
+  font-size: 11.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mf-preview__ticker-badge {
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: rgba(47, 214, 143, 0.16);
+  color: var(--mf-brand);
+  font-weight: 700;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+/* Light mode adjustments for HeroPreview */
+html[data-theme="light"]:root:root .makefy-landing .mf-preview {
+  background: rgba(255, 255, 255, 0.92) !important;
+  border-color: rgba(16, 185, 129, 0.22) !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08), 0 0 35px rgba(16, 185, 129, 0.06) !important;
+}
+
+html[data-theme="light"]:root:root .makefy-landing .mf-preview__bar {
+  background: rgba(240, 246, 242, 0.7);
+  border-bottom-color: rgba(16, 185, 129, 0.14);
+}
+
+html[data-theme="light"]:root:root .makefy-landing .mf-preview__stat {
+  background: #f4f8f5;
+  border-color: rgba(16, 185, 129, 0.15);
+}
+
+html[data-theme="light"]:root:root .makefy-landing .mf-preview__stat:hover {
+  background: #ffffff;
+  border-color: rgba(16, 185, 129, 0.35);
+  box-shadow: 0 6px 18px rgba(16, 185, 129, 0.12);
+}
+
+html[data-theme="light"]:root:root .makefy-landing .mf-preview__row {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(16, 185, 129, 0.16);
+}
+
+html[data-theme="light"]:root:root .makefy-landing .mf-preview__row:hover,
+html[data-theme="light"]:root:root .makefy-landing .mf-preview__row.is-active {
+  background: #ffffff;
+  border-color: rgba(16, 185, 129, 0.45);
+  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.14);
+}
+
+html[data-theme="light"]:root:root .makefy-landing .mf-preview__ticker {
+  background: rgba(16, 185, 129, 0.08);
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+html[data-theme="light"]:root:root .makefy-landing .mf-preview-aura {
+  background: radial-gradient(circle at 50% 40%, rgba(16, 185, 129, 0.15) 0%, rgba(56, 189, 248, 0.08) 40%, transparent 70%);
+}
+
+/* ---------- 8. FOOTER DUAL THEME SUPPORT ---------- */
+html[data-theme="light"] body:has(.makefy-landing) .makefy-footer {
+  --makefy-footer-bg: linear-gradient(180deg, #edf4f0 0%, #e1ebe5 100%);
+  --makefy-footer-surface: #ffffff;
+  --makefy-footer-border: rgba(16, 185, 129, 0.15);
+  --makefy-footer-text: #2f4339;
+  --makefy-footer-heading: #0f1e17;
+  --makefy-footer-muted: #597065;
+  --makefy-footer-link: #3b5247;
+  --makefy-footer-hover: #059669;
+  --makefy-footer-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+/* Light mode nav overrides */
+html[data-theme="light"]:root:root .makefy-landing .makefy-landing-nav__link {
+  color: #263830 !important;
+  border-color: rgba(16, 185, 129, 0.2) !important;
+  background: rgba(255, 255, 255, 0.8) !important;
+}
+
+html[data-theme="light"]:root:root .makefy-landing .makefy-landing-nav__link:hover {
+  color: #0f1e17 !important;
+  background: #ffffff !important;
+  border-color: rgba(16, 185, 129, 0.4) !important;
+}
+
+html[data-theme="light"]:root:root .makefy-landing .makefy-landing-nav__link--primary {
+  color: #ffffff !important;
+  background: #059669 !important;
+  border-color: transparent !important;
+}
+
+html[data-theme="light"]:root:root .makefy-landing .makefy-landing-nav__link--primary:hover {
+  background: #047857 !important;
+  color: #ffffff !important;
+}
+
+html[data-theme="light"]:root:root .makefy-landing select.makefy-landing-nav__link option {
+  background: #ffffff;
+  color: #0f1e17;
+}
+
+html[data-theme="dark"]:root:root .makefy-landing select.makefy-landing-nav__link option {
+  background: #111b17;
+  color: #eef3f0;
+}
+
+/* Light mode support & step cards */
+html[data-theme="light"]:root:root .makefy-landing .mf-story__step,
+html[data-theme="light"]:root:root .makefy-landing .mf-story__workspace,
+html[data-theme="light"]:root:root .makefy-landing .mf-story__workspace-item {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border-color: rgba(16, 185, 129, 0.16) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05) !important;
+}
+
+html[data-theme="light"]:root:root .makefy-landing .mf-story__step:hover {
+  border-color: rgba(16, 185, 129, 0.35) !important;
+  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.1) !important;
+}
+
+html[data-theme="light"]:root:root .makefy-landing .mf-story__step h3,
+html[data-theme="light"]:root:root .makefy-landing .mf-story__workspace-head b,
+html[data-theme="light"]:root:root .makefy-landing .mf-story__workspace-item b {
+  color: #0f1e17 !important;
+}
+
+html[data-theme="light"]:root:root .makefy-landing .mf-story__step p,
+html[data-theme="light"]:root:root .makefy-landing .mf-story__workspace-head small,
+html[data-theme="light"]:root:root .makefy-landing .mf-story__workspace-item small {
+  color: #4b6357 !important;
+}
+
+/* ---------- 9. RESPONSIVE & MOBILE NAVIGATION (TELEFON FORMATI) ---------- */
+.makefy-header__controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.makefy-desktop-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.makefy-landing-nav__select {
+  padding: 0 10px;
+  min-height: 40px;
+  background: var(--surface) !important;
+  border-radius: 12px;
+  cursor: pointer;
+  outline: none;
+}
+
+.makefy-menu-toggle {
+  display: none;
+}
+
+/* Mobile Drawer (Ochiluvchi mobil menyu) */
+.makefy-mobile-drawer {
+  display: none;
+}
+
+@media (max-width: 860px) {
+  /* Header padding & shell */
+  .makefy-landing__shell {
+    width: min(calc(100% - 24px), 1220px) !important;
+  }
+
+  .makefy-header--landing {
+    min-height: 64px !important;
+    padding: 0 !important;
+    position: relative;
+  }
+
+  /* Desktop nav yashiriladi, uning o'rniga hamburger ochiladi */
+  .makefy-desktop-nav {
+    display: none !important;
+  }
+
+  /* Mobil menyu tugmasi */
+  .makefy-menu-toggle {
+    display: grid !important;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+    transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+  }
+
+  .makefy-menu-toggle:hover {
+    border-color: var(--mf-brand);
+    color: var(--mf-brand);
+    transform: scale(1.05);
+  }
+
+  .makefy-menu-toggle:active {
+    transform: scale(0.95);
+  }
+
+  /* Mobil ochiluvchi menyu (Drawer) */
+  .makefy-mobile-drawer {
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 16px;
+    border-radius: 20px;
+    flex-direction: column;
+    gap: 12px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 30px rgba(47, 214, 143, 0.1);
+    animation: mf-mobile-menu-down 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Dark mode drawer */
+  html:root:root .makefy-mobile-drawer,
+  html[data-theme="dark"]:root:root .makefy-mobile-drawer {
+    background: rgba(11, 20, 16, 0.95) !important;
+    border: 1px solid rgba(255, 255, 255, 0.14) !important;
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+  }
+
+  /* Light mode drawer */
+  html[data-theme="light"]:root:root .makefy-mobile-drawer {
+    background: rgba(255, 255, 255, 0.97) !important;
+    border: 1px solid rgba(16, 185, 129, 0.25) !important;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1) !important;
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+  }
+
+  .makefy-mobile-drawer.is-open {
+    display: flex !important;
+  }
+
+  @keyframes mf-mobile-menu-down {
+    from {
+      opacity: 0;
+      transform: translateY(-8px) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  .makefy-mobile-drawer__links {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .makefy-mobile-drawer__link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    min-height: 40px;
+    padding: 0 12px;
+    border-radius: 12px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 460;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+    transition: background-color 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+  }
+
+  .makefy-mobile-drawer__icon {
+    color: var(--mf-brand);
+    flex-shrink: 0;
+  }
+
+  .makefy-mobile-drawer__link:hover {
+    background: var(--surface-3);
+    border-color: var(--mf-brand);
+    color: var(--mf-brand);
+  }
+
+  .makefy-mobile-drawer__divider {
+    height: 1px;
+    background: var(--border);
+    margin: 2px 0;
+  }
+
+  .makefy-mobile-drawer__actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .makefy-mobile-drawer__btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 7px !important;
+    width: 100% !important;
+    min-height: 44px !important;
+    font-size: 13.5px !important;
+    font-weight: 480 !important;
+    letter-spacing: -0.01em !important;
+    border-radius: 12px !important;
+    text-decoration: none !important;
+    transition: background-color 0.18s ease, transform 0.18s ease !important;
+  }
+
+  .makefy-mobile-drawer__btn:active {
+    transform: scale(0.98);
+  }
+
+  .makefy-mobile-drawer__btn--ghost {
+    background: var(--surface-2) !important;
+    border: 1px solid var(--border) !important;
+    color: var(--text) !important;
+  }
+
+  .makefy-mobile-drawer__btn--primary {
+    background: var(--mf-brand) !important;
+    border: 1px solid transparent !important;
+    color: var(--mf-on-brand) !important;
+    box-shadow: 0 4px 14px rgba(47, 214, 143, 0.28) !important;
+  }
+
+  .makefy-mobile-drawer__btn--secondary {
+    grid-column: span 2;
+    background: var(--surface-3) !important;
+    border: 1px solid var(--border) !important;
+    color: var(--text) !important;
+  }
+
+  /* Hero Section on Mobile */
+  .makefy-hero {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+    padding: 32px 0 44px !important;
+  }
+
+  .makefy-hero__copy {
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  .makefy-eyebrow {
+    margin: 0 auto 16px;
+  }
+
+  .makefy-hero h1 {
+    font-size: clamp(2rem, 7.5vw, 2.7rem) !important;
+    letter-spacing: -0.035em !important;
+  }
+
+  .makefy-hero__description {
+    font-size: 0.95rem !important;
+    line-height: 1.55 !important;
+    margin: 12px auto 22px !important;
+  }
+
+  .makefy-actions {
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 10px !important;
+  }
+
+  .makefy-primary-landing,
+  .makefy-secondary-landing {
+    width: 100% !important;
+    justify-content: center !important;
+    min-height: 48px !important;
+    font-size: 15px !important;
+  }
+
+  .makefy-proof {
+    justify-content: center;
+    text-align: center;
+  }
+
+  /* Hero Preview Card on Mobile */
+  .mf-preview-wrapper {
+    max-width: 100% !important;
+  }
+
+  .mf-preview {
+    border-radius: 18px !important;
+  }
+
+  .mf-preview__stats {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 6px !important;
+  }
+
+  .mf-preview__stat {
+    padding: 10px 8px !important;
+    border-radius: 12px !important;
+  }
+
+  .mf-preview__stat strong {
+    font-size: 17px !important;
+  }
+
+  .mf-preview__stat small {
+    font-size: 10.5px !important;
+  }
+
+  .mf-preview__stat-delta {
+    font-size: 9.5px !important;
+  }
+
+  .mf-preview__row {
+    padding: 10px 12px !important;
+    gap: 10px !important;
+  }
+
+  .mf-preview__ico {
+    width: 32px !important;
+    height: 32px !important;
+    border-radius: 9px !important;
+  }
+
+  .mf-preview__row-info b {
+    font-size: 12.5px !important;
+  }
+
+  .mf-preview__row-info small {
+    font-size: 11px !important;
+  }
+
+  .mf-preview__chip {
+    font-size: 10.5px !important;
+    padding: 2px 7px !important;
+  }
+
+  .mf-preview__ticker {
+    padding: 8px 10px !important;
+    font-size: 11px !important;
+  }
+
+  .mf-preview__ticker-text {
+    max-width: 160px;
+  }
+
+  /* Home cards (Bot turlari) on mobile */
+  .makefy-home-cards {
+    grid-template-columns: 1fr !important;
+  }
+
+  .makefy-pricing-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+

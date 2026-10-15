@@ -1,0 +1,85 @@
+/* 7-bosqich: QAYTA DIZAYN — "kam quti, ko'p havo". Linear/Stripe uslubidagi tekis (flat) ko'rinish.
+   Katta qutilar o'rniga: ingichka ajratgichlar, yagona statistika qatori, ro'yxat ko'rinishidagi amallar.
+   Oxirgi ulanadi; ":root:root" eski tema qoidalaridan ustun turishi uchun. */
+:root:root body{background:var(--bg);font-size:15px;letter-spacing:-.005em}
+:root:root .app-main{padding-top:26px}
+:root:root .mf-sidebar{background:var(--bg);box-shadow:none;backdrop-filter:none}
+:root:root .mf-sidebar__promo{display:none}
+:root:root .mf-sidebar__item{min-height:38px;border-radius:8px;font-size:13px}
+:root:root .mf-sidebar__item.is-active{background:var(--surface-2);box-shadow:none;color:var(--text)}
+:root:root .mf-topbar{background:var(--bg);backdrop-filter:none;-webkit-backdrop-filter:none;min-height:56px}
+:root:root .mf-topbar__inner{min-height:56px}
+:root:root .mf-page h1{font-size:clamp(1.5rem,2.6vw,2rem);line-height:1.15;letter-spacing:-.03em;font-weight:700;max-width:none}
+:root:root .mf-page h2{font-size:1.05rem;letter-spacing:-.02em}
+:root:root .mf-page p{font-size:.94rem}
+:root:root .mf-dashboard-head,:root:root .mf-bots-head{margin-bottom:20px}
+:root:root .mf-kicker{font-size:11px}
+
+/* Qutilar → bo'limlar: faqat yuqori ajratgich */
+:root:root .mf-panel,:root:root .mf-detail-card,:root:root .mf-profile-card,:root:root .mf-settings-card,:root:root .mf-settings-profile,:root:root .mf-create-hero{
+  background:transparent;border:0;border-top:1px solid var(--border);border-radius:0;box-shadow:none;padding:20px 0}
+:root:root .mf-dashboard-columns{gap:36px;margin-top:8px}
+:root:root .mf-profile-grid{gap:0 36px}
+
+/* 4 ta alohida karta → bitta statistika qatori */
+:root:root .mf-overview-grid,:root:root .mf-bots-summary,:root:root .mf-detail-stats{gap:0;border:1px solid var(--border);border-radius:14px;background:var(--surface);overflow:hidden;margin-bottom:12px}
+:root:root .mf-metric-card,:root:root .mf-bots-summary-card,:root:root .mf-detail-stat{border:0;border-right:1px solid var(--border);border-radius:0;background:transparent;box-shadow:none;min-height:84px}
+:root:root .mf-metric-card:last-child,:root:root .mf-bots-summary-card:last-child,:root:root .mf-detail-stat:last-child{border-right:0}
+:root:root .mf-metric-card:hover,:root:root .mf-bots-summary-card:hover,:root:root .mf-detail-stat:hover{transform:none;box-shadow:none}
+@media(max-width:980px){
+  :root:root .mf-metric-card:nth-child(2n),:root:root .mf-bots-summary-card:nth-child(2n),:root:root .mf-detail-stat:nth-child(2n){border-right:0}
+  :root:root .mf-metric-card:nth-child(-n+2),:root:root .mf-bots-summary-card:nth-child(-n+2),:root:root .mf-detail-stat:nth-child(-n+2){border-bottom:1px solid var(--border)}
+}
+
+/* Tezkor amallar: kartalar emas, ajratgichli ro'yxat */
+:root:root .mf-action-row{grid-template-columns:repeat(2,minmax(0,1fr));gap:0 28px;margin-bottom:12px}
+:root:root .mf-action-card{background:transparent;border:0;border-bottom:1px solid var(--border);border-radius:0;min-height:54px;padding:8px 2px;box-shadow:none}
+:root:root .mf-action-card:hover{transform:none;box-shadow:none;background:var(--surface-2)}
+@media(min-width:1100px){:root:root .mf-action-row{grid-template-columns:repeat(4,minmax(0,1fr))}}
+
+/* Hero: bitta tinch chiziq (dekorativ doira/naqsh yo'q) */
+:root:root .mf-hero-strip{grid-template-columns:1fr;margin-bottom:12px}
+:root:root .mf-hero-note{display:none}
+:root:root .mf-hero-card,:root:root .mf-detail-hero,:root:root .mf-profile-hero{min-height:0;padding:20px 22px;border-radius:14px;box-shadow:none;background:var(--surface-2);color:var(--text)}
+:root:root .mf-hero-card::before,:root:root .mf-hero-card::after{display:none}
+:root:root .mf-hero-card h2,:root:root .mf-detail-hero h2,:root:root .mf-profile-identity strong,:root:root .mf-profile-balance strong{color:var(--text)}
+:root:root .mf-hero-card p,:root:root .mf-hero-card__eyebrow,:root:root .mf-detail-hero p,:root:root .mf-profile-identity small,:root:root .mf-profile-balance small{color:var(--text-muted)}
+:root:root .mf-hero-card__link{background:var(--accent);color:var(--accent-text)}
+
+/* Bot kartalari va tugmalar: yengil */
+:root:root .mf-bot-card{border-radius:12px;box-shadow:none;background:var(--surface)}
+:root:root .mf-bot-card:hover{transform:none;box-shadow:none;border-color:var(--accent)}
+:root:root .mf-button{border-radius:9px;min-height:38px;font-weight:600}
+:root:root .mf-button--primary{background-image:none;box-shadow:none}
+:root:root .mf-empty-state{background:transparent;border:1px dashed var(--border);border-radius:14px;padding:40px 16px}
+
+/* Mobil: pastki navigatsiya — ekran tagiga yopishgan oddiy panel */
+@media(max-width:760px){
+  :root:root .app-main{padding-bottom:84px}
+  :root:root .mf-bottom-nav{left:0;right:0;bottom:0;min-height:58px;padding:6px 8px max(6px,env(safe-area-inset-bottom));border:0;border-top:1px solid var(--border);border-radius:0;box-shadow:none}
+  :root:root .mf-nav-create{transform:translateY(-6px);gap:2px}
+  :root:root .mf-nav-create span{width:30px;height:30px;border-radius:10px;box-shadow:none}
+  :root:root .mf-nav-item.is-active{background:transparent;color:var(--accent-ink,var(--accent-dim))}
+  :root:root .mf-dashboard-head h1,:root:root .mf-bots-head h1{font-size:26px;max-width:none}
+  :root:root .mf-action-row{grid-template-columns:1fr}
+}
+
+/* Inglizcha kicker yozuvlar (BUILD STUDIO, ACCOUNT SPACE…) — o'zbekcha interfeysda keraksiz */
+:root:root .mf-page .mf-kicker{display:none}
+:root:root .mf-topbar__inner{justify-content:space-between}
+:root:root .mf-icon-button{background:transparent;border:0;width:40px;height:40px}
+:root:root .mf-icon-button:hover{background:var(--surface-2)}
+/* Yangi bot: segment tanlagich yengil */
+:root:root .mf-create-tabs{background:var(--surface-2);border:0;padding:3px}
+:root:root .mf-create-tab[class*="bg-accent"]{background:var(--surface);color:var(--text);box-shadow:0 1px 2px rgba(0,0,0,.12)}
+:root:root .mf-create-hero{padding:6px 0 18px;border:0;box-shadow:none;background:transparent;margin-bottom:8px}
+:root:root .mf-create-hero__mark{width:40px;height:40px;box-shadow:none;border-radius:12px}
+/* Profil: oq qutilar o'rniga ajratgichli ro'yxat */
+:root:root .mf-profile-facts{grid-template-columns:1fr;gap:0}
+:root:root .mf-profile-fact{display:flex;flex-direction:row;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border:0;border-bottom:1px solid var(--border);border-radius:0;background:transparent;min-height:0}
+:root:root .mf-profile-fact:last-child{border-bottom:0}
+:root:root .mf-profile-links{grid-template-columns:1fr;gap:0}
+:root:root .mf-profile-link{justify-content:flex-start;min-height:48px;border:0;border-bottom:1px solid var(--border);border-radius:0;background:transparent;box-shadow:none}
+:root:root .mf-profile-link--primary{color:var(--accent-ink,var(--accent-dim));background:transparent}
+:root:root .mf-profile-avatar{width:52px;height:52px;font-size:20px;border-radius:14px}
+:root:root .mf-profile-hero{padding:16px 0;background:transparent;border-radius:0}

@@ -1,0 +1,259 @@
+/* ==========================================================================
+   Makefy — Text Appearance & Reveal Animations
+   Matnlar va elementlar uchun silliq paydo bo'lish animatsiyalari
+   ========================================================================== */
+
+@keyframes textRevealUp {
+  0% {
+    opacity: 0;
+    transform: translateY(22px);
+    filter: blur(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0px);
+  }
+}
+
+@keyframes textRevealScale {
+  0% {
+    opacity: 0;
+    transform: translateY(14px) scale(0.97);
+    filter: blur(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes textGradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes subtleFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes shimmerGlow {
+  0% {
+    box-shadow: 0 0 15px rgba(18, 216, 132, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(18, 216, 132, 0.45);
+  }
+  100% {
+    box-shadow: 0 0 15px rgba(18, 216, 132, 0.2);
+  }
+}
+
+/* Animatsiya klasslari */
+.anim-reveal-hero-badge {
+  animation: textRevealUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both;
+}
+
+.anim-reveal-hero-h1 {
+  animation: textRevealUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+}
+
+.anim-reveal-hero-desc {
+  animation: textRevealUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+}
+
+.anim-reveal-hero-actions {
+  animation: textRevealUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.45s both;
+}
+
+.anim-reveal-hero-proof {
+  animation: textRevealUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both;
+}
+
+/* Gradient matnlar uchun nur oqimi */
+.makefy-gradient-text-animated {
+  background: linear-gradient(135deg, #12d884 0%, #38ef7d 50%, #4facfe 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textGradientShift 4s ease infinite;
+}
+
+/* Demo box dizayni */
+.makefy-demo-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  background: rgba(18, 216, 132, 0.12);
+  border: 1px solid rgba(18, 216, 132, 0.35);
+  border-radius: 999px;
+  color: #12d884;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+html[data-theme="dark"] .makefy-demo-badge {
+  background: rgba(18, 216, 132, 0.15);
+  border-color: rgba(18, 216, 132, 0.4);
+  color: #38ef7d;
+}
+
+/* Demo login card styling */
+.makefy-demo-helper-card {
+  margin: 18px 0;
+  padding: 16px;
+  border-radius: 16px;
+  background: linear-gradient(145deg, rgba(18, 216, 132, 0.07), rgba(74, 103, 199, 0.06));
+  border: 1px solid rgba(18, 216, 132, 0.28);
+  box-shadow: 0 10px 24px rgba(18, 216, 132, 0.06);
+  position: relative;
+  overflow: hidden;
+  animation: textRevealScale 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.makefy-demo-helper-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.makefy-demo-helper-card__title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.92rem;
+  font-weight: 750;
+  color: var(--auth-text, #102018);
+}
+
+.makefy-demo-helper-card__creds {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin: 10px 0 14px;
+}
+
+.makefy-demo-cred-chip {
+  display: flex;
+  flex-direction: column;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  font-size: 0.78rem;
+}
+
+html[data-theme="dark"] .makefy-demo-cred-chip {
+  background: rgba(16, 26, 38, 0.85);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.makefy-demo-cred-chip span {
+  color: var(--auth-muted, #6f7b78);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.makefy-demo-cred-chip code {
+  color: #0fa464;
+  font-family: monospace;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+html[data-theme="dark"] .makefy-demo-cred-chip code {
+  color: #38ef7d;
+}
+
+.makefy-demo-quick-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(18, 216, 132, 0.45);
+  background: linear-gradient(135deg, #12d884 0%, #0fa464 100%);
+  color: #fff;
+  font-size: 0.88rem;
+  font-weight: 750;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(18, 216, 132, 0.28);
+  transition: all 0.2s ease;
+}
+
+.makefy-demo-quick-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 26px rgba(18, 216, 132, 0.4);
+  filter: brightness(1.05);
+}
+
+.makefy-demo-quick-btn:active {
+  transform: translateY(0);
+}
+
+/* Demo rejim banneri (Dashboard ichida) */
+.makefy-demo-top-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 18px;
+  background: linear-gradient(90deg, rgba(18, 216, 132, 0.14), rgba(74, 103, 199, 0.12));
+  border-bottom: 1px solid rgba(18, 216, 132, 0.3);
+  font-size: 0.85rem;
+  color: var(--text, #102018);
+  position: relative;
+  z-index: 30;
+}
+
+.makefy-demo-top-banner__actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.makefy-demo-btn-sm {
+  padding: 4px 10px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+html[data-theme="dark"] .makefy-demo-btn-sm {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+.makefy-demo-btn-sm:hover {
+  background: rgba(0, 0, 0, 0.12);
+}
+
+html[data-theme="dark"] .makefy-demo-btn-sm:hover {
+  background: rgba(255, 255, 255, 0.2);
+}

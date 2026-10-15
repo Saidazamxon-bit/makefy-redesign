@@ -1,0 +1,140 @@
+/* =====================================================================
+   MAKEFY ILOVA QOBIG'I: yon panel (yig'iladigan), yuqori panel, pastki navigatsiya, bot tablari, admin qobig'i
+   ===================================================================== */
+.sh { min-height: 100dvh; display: grid; grid-template-columns: minmax(0, 1fr); background: var(--bg); color: var(--text); }
+@media (min-width: 1024px) {
+  .sh { grid-template-columns: var(--sh-side) minmax(0, 1fr); }
+  .sh[data-compact="true"] { grid-template-columns: var(--sh-side-compact) minmax(0, 1fr); }
+}
+.sh-col { min-width: 0; display: flex; flex-direction: column; min-height: 100dvh; }
+
+/* ---- Yon panel ---- */
+.sh-side { display: none; }
+@media (min-width: 1024px) {
+  .sh-side { position: sticky; top: 0; height: 100dvh; display: flex; flex-direction: column; gap: 4px; padding: 16px 12px; background: var(--surface); border-right: 1px solid var(--border); overflow-y: auto; }
+}
+.sh-side__brand { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 4px 6px 16px; min-height: 52px; }
+.sh-side__brand a { display: inline-flex; min-width: 0; }
+.sh-side__caption { padding: 8px 12px 6px; font-size: 11px; font-weight: 650; letter-spacing: .08em; text-transform: uppercase; color: var(--text-dim); }
+.sh-nav { display: grid; gap: 2px; }
+.sh-nav__item { position: relative; display: flex; align-items: center; gap: 12px; min-height: 40px; padding: 0 12px; border-radius: var(--radius-sm); color: var(--text-muted); font-size: 14px; font-weight: 550; text-decoration: none; transition: background var(--dur-1) var(--ease), color var(--dur-1); }
+.sh-nav__item i { width: 20px; text-align: center; font-size: 15px; flex: none; }
+.sh-nav__item:hover { background: var(--surface-2); color: var(--text); }
+.sh-nav__item:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+.sh-nav__item.is-active { background: var(--accent-soft); color: var(--text); font-weight: 650; }
+.sh-nav__item.is-active i { color: var(--accent); }
+.sh-nav__item.is-active::before { content: ''; position: absolute; left: -12px; top: 9px; bottom: 9px; width: 3px; border-radius: 0 3px 3px 0; background: var(--accent); }
+.sh-side__spacer { flex: 1; }
+.sh-cta { display: grid; gap: 4px; margin: 8px 0; padding: 14px; border-radius: var(--radius-lg); background: var(--surface-2); border: 1px solid var(--border); }
+.sh-cta b { font-size: 14px; }
+.sh-cta small { color: var(--text-muted); font-size: 12.5px; line-height: 1.45; }
+.sh-cta .mf-btn { margin-top: 8px; }
+.sh[data-compact="true"] .sh-nav__item span, .sh[data-compact="true"] .sh-side__caption, .sh[data-compact="true"] .sh-cta small, .sh[data-compact="true"] .sh-cta b,
+.sh[data-compact="true"] .sh-side__brand a, .sh[data-compact="true"] .sh-cta .mf-btn span { display: none; }
+.sh[data-compact="true"] .sh-nav__item { justify-content: center; padding: 0; }
+.sh[data-compact="true"] .sh-nav__item.is-active::before { left: -12px; }
+.sh[data-compact="true"] .sh-side__brand { justify-content: center; padding-inline: 0; }
+.sh[data-compact="true"] .sh-cta { padding: 8px; background: transparent; border: 0; }
+
+/* ---- Yuqori panel ---- */
+.sh-top { position: sticky; top: 0; z-index: 20; display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: var(--sh-top); padding: env(safe-area-inset-top) clamp(12px, 3vw, 28px) 0; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); }
+.sh-top__left { display: flex; align-items: center; gap: 12px; min-width: 0; flex-shrink: 0; }
+.sh-top__brand { display: inline-flex; align-items: center; text-decoration: none; position: relative; }
+@media (min-width: 1024px) { .sh-top__brand { display: none; } }
+.sh-top__crumbs { display: none; }
+@media (min-width: 1024px) { .sh-top__crumbs { display: block; } }
+.sh-top__right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; margin-left: auto; }
+.sh-pill { display: inline-flex; align-items: center; gap: 8px; min-height: 36px; padding: 0 12px; border-radius: var(--radius-pill); border: 1px solid var(--border-light); background: var(--surface); color: var(--text); font-size: 13px; font-weight: 600; text-decoration: none; font-variant-numeric: tabular-nums; transition: background var(--dur-1); }
+.sh-pill:hover { background: var(--surface-2); }
+.sh-pill i { color: var(--accent); font-size: 12px; }
+.sh-pill--plan { text-transform: capitalize; }
+.sh-top__plan { display: none; }
+@media (min-width: 640px) { .sh-top__plan { display: inline-flex; } }
+.sh-profile { position: relative; }
+.sh-profile__btn { display: grid; place-items: center; width: 40px; height: 40px; padding: 0; border: 0; border-radius: 50%; background: transparent; cursor: pointer; }
+.sh-profile__btn:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+.sh-profile .mf-menu { right: 0; top: calc(100% + 8px); width: 260px; max-height: calc(100dvh - 90px); overflow-y: auto; }
+.sh-profile__head { display: flex; align-items: center; gap: 12px; padding: 10px 10px 12px; }
+.sh-profile__name { font-weight: 650; font-size: 14px; }
+.sh-profile__id { color: var(--text-muted); font-size: 12px; }
+.sh-profile__mobile { display: block; }
+@media (min-width: 1024px) { .sh-profile__mobile { display: none; } }
+
+/* ---- Asosiy mazmun ---- */
+.sh-main { width: 100%; max-width: var(--sh-max); margin: 0 auto; padding: clamp(16px, 3vw, 32px) clamp(12px, 3vw, 28px) calc(var(--sh-bottom) + 32px + env(safe-area-inset-bottom)); outline: none; }
+@media (min-width: 1024px) { .sh-main { padding-bottom: 48px; } }
+.sh-main > * + * { margin-top: var(--sp-5); }
+
+/* ---- Pastki navigatsiya (mobil) ---- */
+.sh-bottom { position: fixed; z-index: 30; left: 0; right: 0; bottom: 0; display: grid; grid-template-columns: repeat(5, 1fr); align-items: center; height: calc(var(--sh-bottom) + env(safe-area-inset-bottom)); padding: 0 6px env(safe-area-inset-bottom); background: color-mix(in srgb, var(--surface) 94%, transparent); backdrop-filter: blur(16px); border-top: 1px solid var(--border); }
+@media (min-width: 1024px) { .sh-bottom { display: none; } }
+.sh-bottom__item { display: grid; justify-items: center; gap: 3px; padding: 8px 0; color: var(--text-dim); font-size: 11px; font-weight: 600; text-decoration: none; border-radius: var(--radius-md); }
+.sh-bottom__item i { font-size: 18px; }
+.sh-bottom__item.is-active { color: var(--accent); }
+.sh-bottom__item:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+.sh-bottom__create { display: grid; justify-items: center; gap: 2px; color: var(--text-muted); font-size: 11px; font-weight: 600; text-decoration: none; }
+.sh-bottom__create span { display: grid; place-items: center; width: 44px; height: 44px; margin-top: -18px; border-radius: 16px; background: var(--accent-dim); color: var(--accent-text); box-shadow: var(--shadow-3); font-size: 18px; }
+
+/* ---- Bot tablari ---- */
+.sh-bottabs { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+.sh-bottabs__back { display: grid; place-items: center; width: 36px; height: 36px; border-radius: var(--radius-sm); color: var(--text-muted); text-decoration: none; }
+.sh-bottabs__back:hover { background: var(--surface-2); color: var(--text); }
+.sh-bottabs__name { font-size: 15px; font-weight: 700; }
+.sh-bottabs__tabs { display: flex; gap: 4px; margin-left: auto; }
+.sh-bottabs__tab { display: inline-flex; align-items: center; gap: 8px; min-height: 36px; padding: 0 12px; border-radius: var(--radius-sm); color: var(--text-muted); font-size: 13.5px; font-weight: 600; text-decoration: none; }
+.sh-bottabs__tab:hover { background: var(--surface-2); color: var(--text); }
+.sh-bottabs__tab.is-active { background: var(--surface-2); color: var(--text); }
+
+/* ---- Admin qobig'i ---- */
+.sh-admin__badge { padding: 3px 9px; border-radius: var(--radius-pill); background: var(--accent-soft); color: var(--accent); font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+.sh-admin { display: flex; flex-direction: column; gap: 16px; }
+@media (min-width: 900px) { .sh-admin { flex-direction: row; align-items: flex-start; } }
+.sh-admin__nav { display: flex; gap: 4px; overflow-x: auto; padding-bottom: 4px; scrollbar-width: none; }
+.sh-admin__nav::-webkit-scrollbar { display: none; }
+@media (min-width: 900px) { .sh-admin__nav { flex-direction: column; width: 220px; flex: none; position: sticky; top: calc(var(--sh-top) + 16px); overflow: visible; } }
+.sh-admin__nav .sh-nav__item { flex: none; white-space: nowrap; }
+.sh-admin__nav .sh-nav__item.is-active::before { display: none; }
+.sh-admin__body { flex: 1; min-width: 0; }
+
+
+/* Mobil qobiq: Telegram safe-area faqat bir marta hisoblanadi. */
+.sh-top {
+  min-height: calc(var(--sh-top) + var(--app-top, 0px));
+  padding-top: var(--app-top, env(safe-area-inset-top, 0px));
+  padding-right: max(clamp(12px, 3vw, 28px), var(--app-right, 0px));
+  padding-left: max(clamp(12px, 3vw, 28px), var(--app-left, 0px));
+}
+.sh-top__left { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.sh-top__brand { position: relative; align-items: center; text-decoration: none; }
+.sh-top__brand .mf-brand { min-width: 0; }
+.sh-top__tagline { display: none; }
+@media (min-width: 640px) {
+  .sh-top__tagline { display: block; position: absolute; left: 44px; bottom: -8px; color: var(--text-dim); font-size: 9px; line-height: 1; white-space: nowrap; pointer-events: none; }
+}
+.sh-main {
+  padding-right: max(clamp(12px, 3vw, 28px), var(--app-right, 0px));
+  padding-bottom: calc(var(--sh-bottom) + 40px + var(--app-bottom, env(safe-area-inset-bottom, 0px)));
+  padding-left: max(clamp(12px, 3vw, 28px), var(--app-left, 0px));
+}
+@media (min-width: 1024px) { .sh-main { padding-bottom: 48px; } }
+.sh-bottom {
+  height: calc(var(--sh-bottom) + var(--app-bottom, env(safe-area-inset-bottom, 0px)));
+  padding-right: max(6px, var(--app-right, 0px));
+  padding-bottom: var(--app-bottom, env(safe-area-inset-bottom, 0px));
+  padding-left: max(6px, var(--app-left, 0px));
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+}
+@media (max-width: 600px) {
+  .sh-top { gap: 8px; }
+  .sh-top__right { gap: 6px; }
+  .sh-top__right > .mf-iconbtn:nth-child(1),
+  .sh-top__right > .mf-iconbtn:nth-child(2) { display: none; }
+  .sh-top__brand .mf-brand { gap: 6px; }
+  .sh-top__brand .mf-brand__image { width: 30px; height: 30px; }
+  .sh-top__brand .mf-brand__wordmark { font-size: 16px; }
+  .sh-top .sh-pill:not(.sh-pill--plan) { gap: 4px; padding-inline: 8px; font-size: 12px; max-width: 130px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .sh-profile__btn { width: 34px; height: 34px; }
+}
+@media (max-width: 380px) {
+  .sh-top__brand .mf-brand__wordmark { display: none; }
+}
